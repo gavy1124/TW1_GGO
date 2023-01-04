@@ -54,8 +54,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberDTO> Search(String tag, String data) {
-		return memberdao.Search(tag, data);
+	public List<MemberDTO> Search(String tag, String searchData) {
+		return memberdao.Search(tag, searchData);
 	}
 
 	@Override

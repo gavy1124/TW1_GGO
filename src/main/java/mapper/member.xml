@@ -42,6 +42,40 @@
        		where name like '%' || #{name} || '%'
        </select>
         
+        
+        <!-- 회원번호, 작성자, 작성일  -->
+       
+        <select id="dynamicSearch" resultType="dto" parameterType="Map">
+        	select * from ongo
+        	<where> 
+        		<if test="tag=='no' and data != ''">
+        			no like '%' || #{searchData} || '%'
+        		</if>
+        		<if test="tag=='id' and data != ''">
+        			id like '%' || #{searchData} || '%'
+        		</if>
+        		<if test="tag=='regdate' and data != ''">
+        			<![CDATA[
+        				regdate <= #{searchData}
+        			]]>
+        		</if>
+        		 <!-- 일치날짜는 상관없으나,날짜 검색의 경우는 이하, 이상 검색을 하고픈 경우 
+        		  regdate < #{serachData} 입력시 에러발생함(웰폼드...)
+        		  xml파일에서는 < 이기호 열고닫고를 사용할수 없음.
+        		  문자 그대로 해석해서 사용을 원한다면 CDATA섹션을 만들고 그안에 정의해줘야함.
+        		  ex)  <![CDATA[ 내용 ]]>
+        		   -->
+        		
+        	</where>
+        </select>
+        
+        
+        
+        
+        
+        
+        
+        
         <!-- 
         <select id="categorySelect" resultType="board" parameterType="String">
                 select * from tbboard where category = #{category}
