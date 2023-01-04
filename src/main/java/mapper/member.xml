@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.ggo">
+       <!-- 등록 -->
+        <insert id="write" parameterType="dto">
+                insert into ongo 
+                values(ongo_no.nextval,#{id},#{pass},#{name},#{tel},#{addr},#{email},#{sort},sysdate)
+        </insert>
+       
+        <select id="selectall" resultType="dto">
+                select * from ongo
+                order by no desc
+        </select>
+        
+        <select id="idRead" resultType="dto" parameterType="String">
+        	select * from ongo 
+        	where id=#{id}
+        </select>
+        
+        <delete id="idDelete" parameterType="String">
+        	delete from ongo where id = #{id}
+        </delete>
+        
+        <update id="idUpdate" parameterType="dto">
+        	update ongo
+        	set pass = #{pass}, name = #{name}, tel = #{tel}, addr = #{addr}, email = #{email}, sort = #{sort}
+        	where id = #{id}
+        </update>
+         
+                        
+        <select id="login" resultType="dto" parameterType="dto">
+        	select * from ongo 
+        	where id = #{id} and pass = #{pass}
+        </select>
+         
+         
+        <select id="bottomSearch" resultType="dto" parameterType="String">
+       		select * from ongo
+       		where name like '%' || #{name} || '%'
+       </select>
+        
+        <!-- 
+        <select id="categorySelect" resultType="board" parameterType="String">
+                select * from tbboard where category = #{category}
+        </select>
+        <select id="read" resultType="board" parameterType="String">
+                select * from tbboard where board_no = #{board_no}
+        </select>
+        <delete id="delete" parameterType="String">
+                delete from tbboard where board_no = #{board_no}
+        </delete>
+        <update id="update" parameterType="board">
+                update tbboard
+                set title=#{title},content=#{content}, category=#{category}
+                where board_no=#{board_no}
+        </update>
+        <select id="search" resultType="board" parameterType="String" >
+                select * from tbboard where title like  '%' || #{title} || '%'
+        </select>
+        <select id="dynamicSearch" resultType="board" parameterType="Map">
+                select * from tbboard
+                <where>
+                        <if test="tag == 'title' and data != ''">
+                                title like '%' || #{data} || '%'
+                        </if>
+                        <if test="tag == 'id' and data != ''">
+                                id like '%' || #{data} || '%'
+                        </if>
+                        <if test="tag == 'content' and data != ''">
+                                content like '%' || #{data} || '%'
+                        </if>
+                        <if test="tag == 'write_date' and data != ''">
+                        <![CDATA[
+                                write_date <= #{data}
+                        ]]>
+                        </if>
+                </where>
+        </select>     
+          --> 
+</mapper> 
