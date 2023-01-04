@@ -126,9 +126,9 @@ public class MainController {
 	
 	// 하단검색
 	@RequestMapping("/dataSearch.do")
-	public ModelAndView dataSearch(String search) {
+	public ModelAndView dataSearch(String tag, String searchData) {
 		ModelAndView mav = new ModelAndView("listall_Page");
-		List<MemberDTO> listall =service.Search(search);
+		List<MemberDTO> listall =service.Search(tag, searchData);
 		//System.out.println("전체멤버조회" + listall);
 		mav.addObject("listall", listall);
 		return mav;

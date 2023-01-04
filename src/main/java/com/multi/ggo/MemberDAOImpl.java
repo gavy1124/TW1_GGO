@@ -1,6 +1,8 @@
 package com.multi.ggo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,15 +71,19 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 	@Override
-	public List<MemberDTO> Search(String data) {
+	public List<MemberDTO> Search(String data) { //하단검색
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("com.multi.ongo.bottomSearch",data);
 	}
 
 
 	@Override
-	public List<MemberDTO> Search(String tag, String data) {
-		return null;
+	public List<MemberDTO> Search(String tag, String searchData) { //하단검색
+		//search와 tag 한쌍으로 넘어와야 하니까 Map사용
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("tag", tag);
+		map.put("searchData", searchData);
+		return sqlSession.selectList("com.multi.ggo.dynamicSearch", map);
 	}
 
 

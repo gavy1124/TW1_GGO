@@ -24,9 +24,9 @@ public interface MemberService {
 	
 	//하단검색
 	List<MemberDTO> Search(String data);
+	List<MemberDTO> Search(String tag, String searchData); //아래쪽셀렉터 + 문구입력 + 검색 
 	
 	//회원번호, 아이디, 작성일 검색 
-	List<MemberDTO> Search(String tag, String data); //아래쪽셀렉터 + 문구입력 + 검색 
 	List<MemberDTO> findByCategory(String sort); //셀렉트 카테고리 구분
 	 
 	 

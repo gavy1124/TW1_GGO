@@ -82,7 +82,7 @@
 			<option value="regdate">작성일</option>
 		</select> 
 		
-		<input type="text" name="search" /> 
+		<input type="text" name="searchData" /> 
 		<input type="submit" value="검색">
 	</form>
 		
