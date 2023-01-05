@@ -87,6 +87,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public List<MemberDTO> boardCategory(String sort) { // 조회타입
+		System.out.println("dao임플의 sort : " + sort);
+		return sqlSession.selectList("com.multi.ggo.boardCategory",sort);
+	}
+
+
 	
 
 	

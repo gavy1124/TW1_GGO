@@ -47,20 +47,39 @@ public class MainController {
 	}
 
 	
-// 회원전체조회
+// 타입별전체조회
 	@RequestMapping("/listall.do")
-	public ModelAndView listall() {
+	public ModelAndView listall(String sort) {
+		System.out.println("sort찍 : " + sort);
 		ModelAndView mav = new ModelAndView("listall_Page");
-		List<MemberDTO> listall =service.memberlist();
-		System.out.println("전체멤버조회list" + listall);
+		List<MemberDTO> listall =service.boardCategory(sort);
+		mav.addObject("sort", sort);
 		mav.addObject("listall", listall);
 		return mav;
 	}	
+	
+	
+	
+// 회원전체조회
+//	@RequestMapping("/listall.do")
+//	public ModelAndView listall() {
+//		ModelAndView mav = new ModelAndView("listall_Page");
+//		List<MemberDTO> listall =service.memberlist();
+//		System.out.println("전체멤버조회list" + listall);
+//		mav.addObject("listall", listall);
+//		return mav;
+//	}	
 
+	
+	
+	
+	
+	
+	
+	
 // 회원읽기
 	@RequestMapping("/idRead.do")
 	public ModelAndView idRead(String id, String state ) {
-		//System.out.println("리스트에서 넘겨받은 거 :" + id +",   "+ state);
 		MemberDTO idRead = service.memberIdRead(id);
 		String view = "";
 		if(state.equals("READ")) {
@@ -70,9 +89,12 @@ public class MainController {
 		}
 		ModelAndView mav = new ModelAndView(view);
 		mav.addObject("idRead", idRead);
-		System.out.println("리드가 읽은 id : " + id);
 		return mav;
 	}
+	
+	
+	
+	
 	
 	// 회원삭제
 	@RequestMapping("/idDelete.do")

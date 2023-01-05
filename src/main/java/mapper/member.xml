@@ -69,7 +69,10 @@
         	</where>
         </select>
         
-        
+        <select id="boardCategory" resultType="dto" parameterType="String">
+        	select * from ongo 
+        	where sort = #{sort}
+        </select>
         
         
         

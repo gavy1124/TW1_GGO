@@ -27,6 +27,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public List<MemberDTO> boardCategory(String sort) {
+		List<MemberDTO> list = null;
+		if(sort != null) {
+			if(sort.equals("all")) {
+				list = memberdao.memberlist();
+			}else {
+				list = memberdao.boardCategory(sort);
+			}
+		}
+		return list;
+	}
+	
+	
+	
+	
+	@Override
 	public MemberDTO memberIdRead(String id) {
 		return memberdao.memberIdRead(id);
 	}
@@ -62,6 +78,8 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDTO> findByCategory(String sort) {
 		return memberdao.findByCategory(sort);
 	}
+
+	
 
 	
 	

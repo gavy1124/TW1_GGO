@@ -9,8 +9,8 @@ public interface MemberService {
 	//전체리스트
 	List<MemberDTO> memberlist();
 	
-	//회원 상세조회
-		MemberDTO memberIdRead(String id);
+	//회원 읽기
+	MemberDTO memberIdRead(String id);
 		
 	//회원 삭제
 	int delete(String id);
@@ -29,6 +29,7 @@ public interface MemberService {
 	//회원번호, 아이디, 작성일 검색 
 	List<MemberDTO> findByCategory(String sort); //셀렉트 카테고리 구분
 	 
-	 
+	//카테고리 조회
+	List<MemberDTO>boardCategory(String sort);
 	 
 	 }
