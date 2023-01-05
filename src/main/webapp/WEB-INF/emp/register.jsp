@@ -42,9 +42,9 @@
 
 							<div class="col-sm-3">
 								<select name="sort" class="form-control" id="sort" name="sort" >
-									<option value="중고">중고</option>
-									<option value="나눔">나눔</option>
-									<option value="업체">업체</option>
+									<option value="골드">골드</option>
+									<option value="실버">실버</option>
+									<option value="브론즈">브론즈</option>
 								</select>
 							</div>
 						</div>

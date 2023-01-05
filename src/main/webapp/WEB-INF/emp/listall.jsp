@@ -1,6 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
@@ -10,18 +9,36 @@
  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
   <%-- <%
   	ArrayList<EmpDTO> emplist = (ArrayList<EmpDTO>)request.getAttribute("emplist");
   	int size = emplist.size();
   %> --%>
+  
+  <script type="text/javascript">
+  //자바스크립트에서 자바가 공유해준데이터를 ${}이엘로 받아서 사용
+  var sort = "${sort}" //자바컨트롤러에서 response될때 값을 받아서 셋팅
+  //alert(sort);
+  	$(document).ready(function () {
+  		$("#sort").val(sort).attr("selected","selected");
+		$("#sort").change(function () {
+			//alert($(this).val()); //선택되는지 테스트
+			//location.href="/ggo/listall.do?sort="+$(this).val()
+			location.href="/ggo/listall.do?sort="+encodeURI($(this).val())
+					
+			//선택시 컨트롤러가 실행되며 파라미터값으로, 현재선택한속성이넘어감
+		})
+	})
+  </script>
+  
 </head>
 <body>
-			<form action="">
-				<select name="category"  id="category">
-					<option value="all">전체게시물</option>
-					<option value="경조사">경조사</option>
-					<option value="사내소식">사내소식</option>
-					<option value="게시판">게시판</option>
+			<form action="#">
+				<select name="sort"  id="sort">
+					<option value="all">전체</option>
+					<option value="골드">골드</option>
+					<option value="실버">실버</option>
+					<option value="브론즈">브론즈</option>
 				</select>
 			</form>
 			<!-- 테스트  -->

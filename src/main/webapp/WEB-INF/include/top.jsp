@@ -95,7 +95,7 @@
 					<li><a href="#">경매</a></li>
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="#">배달</a></li>
-					<li><a href="/ggo/listall.do">ex)(관리자)회원리스트</a></li>
+					<li><a href="/ggo/listall.do?sort=all">ex)(관리자)회원리스트</a></li>
 				</ul>
 
 			</div>
