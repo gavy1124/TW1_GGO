@@ -1,6 +1,9 @@
 package com.multi.ggo.board;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class Board_DTO {
 	String no;
@@ -9,6 +12,7 @@ public class Board_DTO {
 	String title;
 	String content;
 	Date write_date;
+	private List<MultipartFile> files;
 	
 	
 	public Board_DTO() {
@@ -26,11 +30,24 @@ public class Board_DTO {
 		this.write_date = write_date;
 	}
 
+	// 파일업로드 추가
+	public Board_DTO(String no, String id, String category, String title, String content, Date write_date,
+			List<MultipartFile> files) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.category = category;
+		this.title = title;
+		this.content = content;
+		this.write_date = write_date;
+		this.files = files;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Board_DTO [no=" + no + ", id=" + id + ", category=" + category + ", title=" + title + ", content="
-				+ content + ", write_date=" + write_date + "]";
+				+ content + ", write_date=" + write_date + ", files=" + files + "]";
 	}
 
 
@@ -94,6 +111,19 @@ public class Board_DTO {
 	}
 
 
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
+	
+	
+
+
+	
 	
 	
 	

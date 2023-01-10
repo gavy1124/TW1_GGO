@@ -15,8 +15,9 @@
 <body>
 	<div class="container-fluid">
 
-		<form role="form" class="form-horizontal" action="/ggo/b_insert.do"
-			method="POST" name="myform">
+		<form role="form" class="form-horizontal" action="/ggo/b_insert.do" method="POST" name="myform" enctype="multipart/form-data">
+			
+			
 			<fieldset>
 				<div id="legend"></div>
 				<div class="form-group" style="padding: 40px">

@@ -2,6 +2,8 @@ package com.multi.ggo.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SessionAttributes("user") 
-public class MainController {
+public class MemberController {
 	
 	MemberService service;
 	
 	@Autowired
-	public MainController(MemberService service) {
+	public MemberController(MemberService service) {
 		super();
 		this.service = service;
 	}
@@ -28,6 +30,24 @@ public class MainController {
 	public String test() {
 		return "/emp/summertest";
 	}
+	
+	
+	
+
+	@RequestMapping("/myjob.do") //수업에선 menupath를 넣어, 별도 jsp연결함
+	public String myjob(HttpSession session) {
+		MemberDTO user = (MemberDTO) session.getAttribute("user");
+		
+		return user.getAddr();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -60,7 +80,7 @@ public class MainController {
 	@RequestMapping("/write.do")
 	public String write(MemberDTO dto) {
 		service.insert(dto);
-		System.out.println("등록 dto : " + dto);
+		//System.out.println("등록 dto : " + dto);
 		return "redirect:/listall.do?sort=all";
 	}
 
@@ -71,8 +91,8 @@ public class MainController {
 		//System.out.println("sort찍 : " + sort);
 		ModelAndView mav = new ModelAndView("listall_Page");
 		List<MemberDTO> listall =service.boardCategory(sort);
-		System.out.println("sort : " + sort);
-		System.out.println("listall : " + listall);
+		//System.out.println("sort : " + sort);
+		//System.out.println("listall : " + listall);
 		mav.addObject("sort", sort);
 		mav.addObject("listall", listall);
 		return mav;
@@ -98,13 +118,13 @@ public class MainController {
 			MemberDTO idRead = service.memberIdRead(id);
 			String view = "";
 			if(state.equals("READ")) {
-				System.out.println("리드: "+idRead.getSort());
+				//System.out.println("리드: "+idRead.getSort());
 				view="idRead_Page";
 			}else {
-				System.out.println("업뎃: "+idRead.getSort());
+				//System.out.println("업뎃: "+idRead.getSort());
 				view="idUpdate_Page";
 			}
-			System.out.println("model수정하기___________________________" + idRead);
+			//System.out.println("model수정하기___________________________" + idRead);
 			//mav.addObject("idRead", idRead);
 			model.addAttribute("idRead", idRead);
 			return view;
