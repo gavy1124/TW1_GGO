@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3><a href="/erp/json/getString">스트링데이터받기</a></h3>
-	<h3><a href="/erp/json/getJsonObj">DTO를 json으로 변환해서 받기</a></h3>
-	<h3><a href="/erp/json/getJsonArr">ArrayList에 저장된 DTO를 json으로 변환해서 받기</a></h3>
+	<h3><a href="/ggo/json/getString">스트링데이터받기</a></h3>
+	<h3><a href="/ggo/json/getJsonObj">DTO를 json으로 변환해서 받기</a></h3>
+	<h3><a href="/ggo/json/getJsonArr">ArrayList에 저장된 DTO를 json으로 변환해서 받기</a></h3>
 </body>
 </html>

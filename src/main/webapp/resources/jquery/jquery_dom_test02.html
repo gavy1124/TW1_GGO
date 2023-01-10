@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" 
+		src="../common/js/jquery-1.11.3.js"> </script> -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<div id="main">
+		<div class="test1">jquery~~~</div>
+		<div class="test2">jquery~~~~</div>
+		<div id="test3">jquery~~~~</div>
+		<div id="test4">jquery~~~~</div>
+		<div id="test5">jquery~~~~</div>
+	</div>
+	
+	<p id="test" >테스트</p>
+	
+	<form>
+		<input type="button" id="nodetest" value="노드엑세스">
+		
+	</form>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#nodetest").on("click", function () {
+				//특정노드의 하위노드 모두가져오기
+				list = $("#main").children();
+				alert(list.length);
+				//메서드 체이닝
+				$("#main").children().css("color","orange");
+				$("#main").children().last().css("color","blue");
+				$("#main").children().first().css("color","red");
+				$("#test").attr("style","background: green; color: yellow; font-weight: bold; font-size: 20pt;");
+			})
+		})
+	</script>
+		<!-- /*
+		  text()->요소의 텍스트 반환
+		  html()->선택한 요소의 html태그가 포함된 컨텐츠 반환
+		  val()->입력필드의 값을 반환
+		  attr()->요소의 속성을 반환
+		  position()-> 요소의 위치 반환
+		*/ -->
+</body>
+</html>
+
+
+

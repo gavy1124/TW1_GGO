@@ -168,7 +168,21 @@
                 </dependency>
 		      
 		      
+		      <!-- json 처리관련 라이브러리 (json paser와 mak등 기본기능의 라이브러리) -->
+		      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		        <dependency>
+				    <groupId>com.fasterxml.jackson.core</groupId>
+				    <artifactId>jackson-core</artifactId>
+				    <version>2.4.6</version>
+				</dependency>
 		      
+		       <!-- json 처리관련 라이브러리 (java객체를 json으로 자동변환 라이브러리) -->
+		      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+				<dependency>
+				    <groupId>com.fasterxml.jackson.core</groupId>
+				    <artifactId>jackson-databind</artifactId>
+				    <version>2.4.6</version>
+				</dependency>
 		      
 		      
 		      

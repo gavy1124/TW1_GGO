@@ -11,6 +11,17 @@
 	<view-controller path="/login_Page" view-name="login_Page"/> 
 	<view-controller path="/mainPage" view-name="indexTemplate"/> 
 	
+	<!-- json테스트  -->
+	
+	<view-controller path="/json_test" view-name="json_test"/> 
+	<view-controller path="/json/view" view-name="indexTemplate"/> 
+	<view-controller path="/json/json" view-name="json_json"/> 
+	<view-controller path="/ajax/view" view-name="etcview/ajax"/> 
+	<view-controller path="/ajax/examview" view-name="etcview/ajaxexamview"/> 
+	
+	<!-- board관련 -->
+	<view-controller path="/B_register" view-name="b_register"/> 
+	
 	
 </beans:beans>
  <!-- path 를 요청하면 view-name을 실행해라 -->

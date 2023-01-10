@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.ggo.board">
+	<select id="b_insert" parameterType="b_dto">
+		insert into b_ongo
+		values(b_ongo_no.nextval, #{id}, #{category}, #{title}, #{content}, sysdate)
+	</select>
+
+	<select id="b_list" resultType="b_dto">
+		select * from b_ongo
+		order by write_date desc
+	</select>
+	
+	<select id="findByCategory" resultType="b_dto" parameterType="String">
+		select * from b_ongo
+		where category = #{category}
+		order by write_date desc
+	</select>
+	
+	<select id="b_read" resultType="b_dto" parameterType="String">
+		select * from b_ongo
+		where no = #{no}
+		order by write_date desc
+	</select>
+
+
+</mapper> 

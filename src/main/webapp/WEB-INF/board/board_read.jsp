@@ -23,7 +23,7 @@
 <body>
 
 	<form class="form-horizontal" 
-		action="/springmvc/board/read.do?state=UPDATE&board_no=${board.board_no }" 
+		action="/springmvc/board/read.do?state=UPDATE&board_no=${board.no }" 
 		method="post" >
 
 		
@@ -31,7 +31,7 @@
 			<div class="col-md-2 text-right">
 				<label for="id" class="control-label">번호</label>
 			</div>
-			<div class="col-md-8">${board.board_no}</div>
+			<div class="col-md-8">${board.no}</div>
 		</div>
 		<div class="form-group">
 			<div class="col-md-2 text-right">

@@ -86,6 +86,9 @@
 <!-- ______________________________________________________________________________________ -->
 
 	<context:component-scan base-package="com.multi.ggo" />
+	<context:component-scan base-package="com" />
+	<context:component-scan base-package="com.multi.ggo.board" />
+	<context:component-scan base-package="main" />
 
 
 

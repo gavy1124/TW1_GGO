@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.multi.ggo">
+<mapper namespace="com.multi.ggo.member">
        <!-- 등록 -->
         <insert id="write" parameterType="dto">
                 insert into ongo 
@@ -72,6 +72,12 @@
         <select id="boardCategory" resultType="dto" parameterType="String">
         	select * from ongo 
         	where sort = #{sort}
+        </select>
+        
+        
+        <select id="noSearch" resultType="dto" parameterType="String">
+        	select * from ongo 
+        	where no = #{no}
         </select>
         
         

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	$(document).ready(function () {
+		//p태그추가
+		$("#insertP").on("click", function () {
+			data = $("<p>newP</p>")
+			data.attr("style","background: yellow; font-weight:bold; font-size:15pt")
+			$("#root").append(data);
+		})
+	
+		//p태그 삭제하기
+		$("#deleteP").on("click", function () {
+			$("#root").children().last().remove();
+		});
+		
+		
+		//div안의 모든 p태그 제거
+		$("#deleteDivAndP").on("click", function () {
+			$("#root").empty();
+		})
+	
+	})
+	
+	</script>
+</head>
+<body>
+	<div id="layer" style="background: yellow"></div>
+
+	<hr>
+
+	<div id="root">
+		<p style="background: gray;">line01</p>
+		<p style="background: skyblue">line02</p>
+		<p style="background: green;">line03</p>
+		<p style="background: red;">line04</p>
+	</div>
+
+	<hr>
+	<button id="insertP">P태그추가하기</button>
+	<button id="deleteP">P태그삭제하기</button>
+	<button id="deleteDivAndP">div안의 모든 p태그 삭제하기</button>
+	<button onclick="innerHTML_test()">innerHTML</button>
+
+
+</body>
+</html>

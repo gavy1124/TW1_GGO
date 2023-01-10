@@ -6,13 +6,22 @@
 <head>
 <title>Bootstrap Example</title>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+	var category = "${category}"
+	$(document).ready(function () {
+		//alert(category)
+		$("#category").val(category).attr("selected","selected");
+		$("#category").change(function () {
+//		alert("#category".val());////////////////////////////////////////////////////??
+			location.href="/ggo/b_category.do?category="+encodeURI($(this).val());
+		})
+		
+	})
+	
+
 	
 </script>
 </head>
@@ -36,21 +45,23 @@
 			<thead>
 				<tr>
 					<th>번호</th>
+					<th>카테고리</th>
 					<th>제목</th>
+					<th>내용</th>
 					<th>작성자</th>
-					<th>등록일</th>
-					<th>삭제</th>
+					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="board" items="${boardlist }">
 					<tr>
-						<td>${board.board_no }</td>
-						<td><a
-							href="/springmvc/board/read.do?board_no=${board.board_no }&state=READ">${board.title }</a></td>
+						<td>${board.no }</td>
+						<td>${board.category }</td>
+						<td><a href="/ggo/b_read.do?no=${board.no}&state=READ"> ${board.title }</a></td>
+						<td>${board.content }</td>
 						<td>${board.id }</td>
 						<td>${board.write_date }</td>
-						<td><a href="/springmvc/board/delete.do?board_no=${board.board_no }">삭제</a></td>
+						
 					</tr>
 				</c:forEach>
 			</tbody>
