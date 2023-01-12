@@ -4,6 +4,41 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.multi.ggo.board">
+	<!-- 첨부파일조회 -->
+	<select id="fileselect" parameterType="String" resultType="b_filedto">
+		select * from board_file
+		where no= #{no}
+	</select>
+	
+	
+	
+	<!--첨부파일 등록  (파라미터 넘기는게 리스트형식이기에, java.util.List식으로 넣어준다.)
+	*** 첨부파일이 몇개들어갈지 정해지지 않았다. 그래서 <foreach> 사용
+	dao에서 넘어온 parameter가 collection에서 item(이름은 임의작성) 으로 하나씩 꺼내서 넘김 ((향상된for문처럼)-->
+	<insert id="fileinsert" parameterType="java.util.List" >
+		insert all
+		<foreach collection="list" item="file" separator=" "> <!--into문 1행, 2행 구분을 separator 띄어쓰기로구분한다.  -->
+			into board_file 
+			values(b_ongo_no.currval, #{file.originalFilename}, #{file.storeFilename}, #{file.boardFileno})
+		</foreach>					
+		select * from dual
+	</insert>
+	
+	
+	
+	<!-- //다운로드 ( @PathVariable String id, @PathVariable String no, @PathVariable String boardFileno 일치하는 boardFileDTO정보가져오기) -->
+	<select id="getFile" parameterType="b_filedto" resultType="b_filedto">
+		select * from board_file
+		where no=#{no} 
+		and boardFileno=#{boardFileno}
+	</select>
+	
+	
+	
+	
+	<!-- __________________________________________________________________________ -->
+
+	
 	<select id="b_insert" parameterType="b_dto">
 		insert into b_ongo
 		values(b_ongo_no.nextval, #{id}, #{category}, #{title}, #{content}, sysdate)

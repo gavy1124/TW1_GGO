@@ -46,8 +46,7 @@
 						for (var i = 0; i < ajaxlist.length; i++) {
 							mydata = mydata +
 								"<tr><td class='boardDate' style=''><a href='/ggo/b_read.do?no="+ ajaxlist[i].no +"&state=READ'>"
-								+ ajaxlist[i].title +"<a></td>"
-								
+								+ ajaxlist[i].title +"<a></td>"+
 								"<td class='boardDate' style=''>"+ ajaxlist[i].write_date +"</td></tr>"
 						}
 						//기존의 출력된 데이터노드를 삭제하고

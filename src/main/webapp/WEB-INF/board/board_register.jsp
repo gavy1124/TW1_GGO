@@ -1,20 +1,17 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
-<title>Insert title here</title>
-<script type="text/javascript">
+	<meta charset="UTF-8">
 	
-</script>
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		
+	</script>
 </head>
 
 <body>
 	<div class="container-fluid">
-
 		<form role="form" class="form-horizontal" action="/ggo/b_insert.do" method="POST" name="myform" enctype="multipart/form-data">
 			
 			
@@ -93,7 +90,7 @@
 					</div>
 					<div class="col-md-8">
 						<input type="file" class="form-control input-lg" name="files"
-							id="files" placeholder="파일선택">
+							id="files" placeholder="파일선택" multiple="multiple">
 					</div>
 				</div>
 				<div class="form-group">
@@ -132,12 +129,6 @@
 							id="title" placeholder="파일선택">
 					</div>
 				</div>
-
-
-
-
-
-
 
 
 

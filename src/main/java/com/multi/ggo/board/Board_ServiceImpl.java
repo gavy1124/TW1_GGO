@@ -16,10 +16,7 @@ public class Board_ServiceImpl implements Board_Service {
 		this.dao = dao;
 	}
 
-	@Override //글등록
-	public int b_insert(Board_DTO dto) {
-		return dao.b_insert(dto);
-	}
+	
 
 	@Override //글조회
 	public List<Board_DTO> b_list() {
@@ -44,11 +41,38 @@ public class Board_ServiceImpl implements Board_Service {
 	public Board_DTO b_read(String no) {
 		return dao.b_read(no);
 	}
-		
-	
-	
-		
 
+	
+	
+	//----------------------------------------------------------
+	@Override //첨부파일조회
+	public List<Board_FileDTO> getFileList(String no) {
+		return dao.getFileList(no);
+	}
+//	@Override //글등록 
+//	public int b_insert(Board_DTO dto) {
+//		return dao.b_insert(dto);
+//	}
+//	
+		
+	
+	
+	//dao클래스에 정의된 두개의 메서드를 호출
+	@Override //게시글글등록  ( + 첨부파일등록)
+	public int b_insert(Board_DTO dto, List<Board_FileDTO> boardfiledtolist) {
+		dao.b_insert(dto);
+		dao.insertFile(boardfiledtolist);
+		
+		return 0;
+	}
+
+
+	//다운로드 ( @PathVariable String id, @PathVariable String no, @PathVariable String boardFileno 일치하는 boardFileDTO정보가져오기)
+	@Override
+	public Board_FileDTO getFile(Board_FileDTO inputdata) {
+		return dao.getFile(inputdata);
+	}
+	
 	
 	
 }

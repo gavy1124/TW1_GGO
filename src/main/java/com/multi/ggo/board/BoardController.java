@@ -2,18 +2,23 @@ package com.multi.ggo.board;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 @Controller
@@ -21,15 +26,14 @@ public class BoardController {
 	Board_Service service;
 	FileUploadLogic fileuploadService;
 	
-	
 	@Autowired
 	public BoardController(Board_Service service, FileUploadLogic fileuploadService) {
 		super();
 		this.service = service;
 		this.fileuploadService = fileuploadService;
 	}
+//______________________________________________________________________________________________________________________
 
-	
 	
 	
 	// 파일업로드 (기존등록을 수정)
@@ -51,10 +55,71 @@ public class BoardController {
 		
 		
 		//3.파일업로드 서비스를 호출해서 실제 서버에 업로드되도록 작업
-		fileuploadService.uploadFiles(files, path);
-		service.b_insert(dto);
+		List<Board_FileDTO> boardfiledtolist= fileuploadService.uploadFiles(files, path);
+		int count = 1;
+		
+		//업로드된 파일의 boardfileno의 값을 셋팅 1~ 첨부파일 마지막 번호
+		for(Board_FileDTO boardfiledto:boardfiledtolist) {
+			boardfiledto.setBoardFileno(count + "");
+			count++;
+		}
+		System.out.println("boardfiledtolist : " +boardfiledtolist);
+		
+		//4. 게시글에대한 일반적인 정보와 춤부되는 파일의 정보를 db에 저장
+		service.b_insert(dto,boardfiledtolist );
+		
 		return "redirect:/b_category.do?category=all";
 	}
+	
+	
+	
+	
+	
+	//다운로드(파일업로드한거)
+	//HttpEntity란?  Http 요청과 응답(요청헤더, 바디, 응답헤더)을 관리하는 객체
+	// ResponseEntity란?  응답데이터를 관리하는 객체 (Http헤더, Http바디, Http상태정보...)
+	//	HttpEntity의 하위/ 스프링 프레임워크에서 지원(import org.springframework.http.ResponseEntity; 통하여확인) / 
+	// <UrlResource>란 ? 파일객체를 다루기위해서 스프링 내부에서 사용하는 객체
+	// @PathVariable = path에서 변수로 쓸거다라는 어노테이션 
+	@RequestMapping("/download/{id}/{no}/{boardFileno}")
+	public ResponseEntity<UrlResource> downloadFile(@PathVariable String id, @PathVariable String no, @PathVariable String boardFileno, HttpSession session) throws MalformedURLException, FileNotFoundException, UnsupportedEncodingException {
+		System.out.println("@@체크 : " + id+ ",  " + no + ",  "   +boardFileno);
+		
+		//글번호와 파일번호를 이용해서 해당 파일을 조회
+		// ㄴ 요청한 파일에 대한 조회이므로 BoardFileDTO를 리턴하도록 처리		
+		
+		//파일을 다운로드하기위해서 저장된 파일의 정보를 가져오기 - 다운로드를 요청한 경우 요청된 파일을 response
+		//*****dto를 넘긴다고 했을때 이렇게 생각함;;;*********************service.getFile(id, no, boardFileno);  
+		Board_FileDTO selectFileinfo = service.getFile(new Board_FileDTO(no,"","",boardFileno));  //id물려도 상관없음, 어차피 맵퍼에 물리는건 no 와 boardFileno
+		System.out.println("selectFileinfo체크 ___________: " + selectFileinfo);		
+		
+		  // ㄴ 순서중요 Board_FileDTO의 멤버변수 순서로. //파일명을 이용해서 다운로드할 파일을 객체로 생성하는 작업
+		  //UrlResource resource = new UrlResource("file :" + 파일의 풀경로(RealPath )
+		  UrlResource resource = 
+				  new UrlResource("file:" +  WebUtils.getRealPath(session.getServletContext(), 
+						  "/WEB-INF/upload/"+selectFileinfo.getStoreFilename()));
+		  
+		  //파일명에 한글이 있는경우, 깨지지않도록 처리 String encodedFilename =
+		  String encodedFilename = UriUtils.encode(selectFileinfo.getOriginalFilename(), "UTF-8"); 
+		  String mycontenttype = "attachment; filename=\""+encodedFilename+"\"";
+		  
+		  //파일다운로드 //// 헤더에 이거슨 CONTENT_DISPOSITION 입력하여 파일다운로다야 알림? return
+		  return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, mycontenttype).body(resource);
+		 
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -112,10 +177,20 @@ public class BoardController {
 		return mav;
 	}
 		
+	
+	
+	
+	
      //게시글 읽기
 	@RequestMapping("/b_read.do")
 	public String b_read(String no, String state, Model model) {
 		Board_DTO board = service.b_read(no);
+		
+		//첨부파일관련 추가
+		List<Board_FileDTO> boardfiledtolist = service.getFileList(no);
+		System.out.println("boardfiledtolist읽기 체크 _________: "+boardfiledtolist);
+		
+		
 		String view="";
 		if(state.equals("READ")) {
 			view = "b_read_page";
@@ -123,8 +198,14 @@ public class BoardController {
 			view = "b_update_page";
 		}
 		model.addAttribute("board", board);
+		model.addAttribute("boardfiledtolist", boardfiledtolist);
 		return view;
 	}
+	
+	
+	
+	
+	
 		
 	
 	//메인화면 ajax처리용 (게시판,경조사,소식 )

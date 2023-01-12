@@ -20,17 +20,20 @@ public class FileUploadLogic {
 		for(MultipartFile multipartFile:multipartFiles) {
 			if(!multipartFile.isEmpty()) { //multipartFile 내용이 있으면, 아래꺼 실행해
 				// 클라이언트가 업로드한 파일명
-				String orignalFilename = multipartFile.getOriginalFilename(); //getOriginalFilename() 메서드가있음. 
-				
+				String originalFilename = multipartFile.getOriginalFilename(); //getOriginalFilename() 메서드가있음. 
+				  
 				//서버에서 식별할수 있도록 파일명을 변경 ( 파일명 중복시 덮어쓰는문제 )
-				String storeFilename = createStoreFilename(orignalFilename); //아래에서 uuid 만드는 메서드 (createStoreFilename)
-				
-				
-				System.out.println("__________orignalFilename : "+orignalFilename);
+				String storeFilename = createStoreFilename(originalFilename); //아래에서 uuid 만드는 메서드 (createStoreFilename)
+				System.out.println("__________orignalFilename : "+originalFilename);
 				
 				// 파일객체를 실제 경로에 저장
-				multipartFile.transferTo(new File(path + File.separator + storeFilename));   //transferTo().메서드가있음
 				// 경로 (...WEB-INF..upload) + 구분(File.separator) + 원래파일이름
+				multipartFile.transferTo(new File(path + File.separator + storeFilename));   //transferTo().메서드가있음
+				
+				//파일업로드가 완료되면, MultipartFile을 >>>  Board_FileDTO에 넣어주게끔
+				filedtolist.add(new Board_FileDTO(originalFilename, storeFilename));
+				
+				
 			}
 		}
 		return filedtolist;

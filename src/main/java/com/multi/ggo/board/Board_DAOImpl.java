@@ -36,5 +36,28 @@ public class Board_DAOImpl implements Board_DAO {
 		return session.selectOne("com.multi.ggo.board.b_read", no);
 	}
 
+	//----------------------------------------------------------
+
+	
+	//첨부파일등록
+	@Override
+	public int insertFile(List<Board_FileDTO> boardfilelist) {
+		return session.insert("com.multi.ggo.board.fileinsert", boardfilelist);
+	}
+	
+
+	//업로드한거조회
+	@Override
+	public List<Board_FileDTO> getFileList(String no) {
+		return session.selectList("com.multi.ggo.board.fileselect", no);
+	}
+
+	
+	//다운로드 ( @PathVariable String id, @PathVariable String no, @PathVariable String boardFileno 일치하는 boardFileDTO정보가져오기)
+	@Override
+	public Board_FileDTO getFile(Board_FileDTO inputdata) {
+		return session.selectOne("com.multi.ggo.board.getFile", inputdata);
+	}
+
 
 }
