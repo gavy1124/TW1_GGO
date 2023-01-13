@@ -115,6 +115,8 @@
 
 		<div class="form-group">
 			<div class="col-md-10 text-center">
+				
+				
 				<input type="submit" class="btn btn-lg btn-primary" 
 				value="수정">
 
@@ -122,6 +124,7 @@
 					onclick="location.href='/stswebTest/board/list.do'">
 					<i class="fa fa-fw fa-close"></i> 목록
 				</button>
+				
 				<button type="button" class="btn btn-danger btn-lg"
 					id="deletebtn">
 					<i class="fa fa-fw fa-close"></i> 삭제

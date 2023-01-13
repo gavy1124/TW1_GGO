@@ -90,7 +90,7 @@
 					<!-- <li class="active"><a href="#">Home</a></li>
 					<li><a href="/erp/menu/insa.do">업무관리</a></li>
 					<li><a href="/erp/menu/board.do">커뮤니티</a></li> -->
-					<li><a href="/ggo/myjob.do">업무관리</a></li>
+					<li><a href="#">업무관리</a></li>
 					<li><a href="/ggo/b_category.do?category=all">게시판list</a></li>
 					<li><a href="/ggo/B_register">게시판등록하기</a></li>
 					<li><a href="/ggo/listall.do?sort=all">ex)(관리자)회원리스트</a></li>

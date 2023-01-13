@@ -75,6 +75,7 @@ public class BoardController {
 	
 	
 	
+	
 	//다운로드(파일업로드한거)
 	//HttpEntity란?  Http 요청과 응답(요청헤더, 바디, 응답헤더)을 관리하는 객체
 	// ResponseEntity란?  응답데이터를 관리하는 객체 (Http헤더, Http바디, Http상태정보...)
@@ -83,7 +84,7 @@ public class BoardController {
 	// @PathVariable = path에서 변수로 쓸거다라는 어노테이션 
 	@RequestMapping("/download/{id}/{no}/{boardFileno}")
 	public ResponseEntity<UrlResource> downloadFile(@PathVariable String id, @PathVariable String no, @PathVariable String boardFileno, HttpSession session) throws MalformedURLException, FileNotFoundException, UnsupportedEncodingException {
-		System.out.println("@@체크 : " + id+ ",  " + no + ",  "   +boardFileno);
+		System.out.println("@@체크: " + id+ ",  " + no + ",  "   +boardFileno);
 		
 		//글번호와 파일번호를 이용해서 해당 파일을 조회
 		// ㄴ 요청한 파일에 대한 조회이므로 BoardFileDTO를 리턴하도록 처리		
@@ -184,7 +185,12 @@ public class BoardController {
      //게시글 읽기
 	@RequestMapping("/b_read.do")
 	public String b_read(String no, String state, Model model) {
+		System.out.println("조회수 메서드읽기전" + no);
+		
+		System.out.println("조회수 메서드읽기후" + no);
 		Board_DTO board = service.b_read(no);
+		
+		
 		
 		//첨부파일관련 추가
 		List<Board_FileDTO> boardfiledtolist = service.getFileList(no);
@@ -193,6 +199,8 @@ public class BoardController {
 		
 		String view="";
 		if(state.equals("READ")) {
+			service.increaseHit(no);
+			System.out.println("+++++조회수처리후 :" + board.hits);
 			view = "b_read_page";
 		}else {
 			view = "b_update_page";

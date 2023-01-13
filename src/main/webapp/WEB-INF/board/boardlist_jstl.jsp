@@ -50,6 +50,7 @@
 					<th>내용</th>
 					<th>작성자</th>
 					<th>작성일</th>
+					<th>조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,12 +62,26 @@
 						<td>${board.content }</td>
 						<td>${board.id }</td>
 						<td>${board.write_date }</td>
+						<td>${board.hits }</td>
 						
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	 <nav aria-label="Page navigation example center">
+		  <ul class="pagination center">
+		    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+		    <li class="page-item"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item"><a class="page-link" href="#">2</a></li>
+		    <li class="page-item"><a class="page-link" href="#">3</a></li>
+		    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+		  </ul>
+		</nav>
+		
+		
+		
+		
 	<form action="/springmvc/board/search.do" method="post">
 		<select name="tag">
 			<option value="id">작성자</option>

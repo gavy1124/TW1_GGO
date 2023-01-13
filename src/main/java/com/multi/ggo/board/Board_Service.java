@@ -15,6 +15,9 @@ public interface Board_Service {
 		
 	//글읽기
 		public Board_DTO b_read(String no);
+	
+		//조회수
+		public void increaseHit(String no);	
 		
 		
 	//----------------------------------------------------------

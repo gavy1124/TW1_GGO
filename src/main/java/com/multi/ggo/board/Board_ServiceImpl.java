@@ -37,7 +37,7 @@ public class Board_ServiceImpl implements Board_Service {
 		return list;
 	}
 
-	@Override
+	@Override //읽기
 	public Board_DTO b_read(String no) {
 		return dao.b_read(no);
 	}
@@ -71,6 +71,14 @@ public class Board_ServiceImpl implements Board_Service {
 	@Override
 	public Board_FileDTO getFile(Board_FileDTO inputdata) {
 		return dao.getFile(inputdata);
+	}
+
+
+
+	@Override // 조회
+	public void increaseHit(String no) {
+		dao.increaseHit(no);
+		
 	}
 	
 	

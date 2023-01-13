@@ -31,7 +31,7 @@ public class Board_DAOImpl implements Board_DAO {
 		return session.selectList("com.multi.ggo.board.findByCategory", category);
 	}
 
-	@Override
+	@Override //읽기
 	public Board_DTO b_read(String no) {
 		return session.selectOne("com.multi.ggo.board.b_read", no);
 	}
@@ -58,6 +58,13 @@ public class Board_DAOImpl implements Board_DAO {
 	public Board_FileDTO getFile(Board_FileDTO inputdata) {
 		return session.selectOne("com.multi.ggo.board.getFile", inputdata);
 	}
+
+	@Override // 조회
+	public void increaseHit(String no) {
+		session.update("com.multi.ggo.board.hits", no);
+		
+	}
+
 
 
 }

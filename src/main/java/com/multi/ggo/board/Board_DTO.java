@@ -13,6 +13,7 @@ public class Board_DTO {
 	String content;
 	Date write_date;
 	private List<MultipartFile> files;
+	int hits;
 	
 	
 	public Board_DTO() {
@@ -73,6 +74,16 @@ public class Board_DTO {
 
 	public String getCategory() {
 		return category;
+	}
+
+
+	public int getHits() {
+		return hits;
+	}
+
+
+	public void setHits(int hits) {
+		this.hits = hits;
 	}
 
 

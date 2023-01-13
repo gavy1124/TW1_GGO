@@ -15,6 +15,9 @@ public interface Board_DAO {
 	//글읽기
 	public Board_DTO b_read(String no);
 		
+	
+	//조회수
+	public void increaseHit(String no);	
 	//----------------------------------------------------------
 	
 	//첨부파일 등록   (혼자서 존재할수없는 child테이블)
