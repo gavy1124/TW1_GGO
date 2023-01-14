@@ -21,6 +21,9 @@ public interface Board_DAO {
 	//페이징-테스트1
 //	public List<Board_DTO> pagingList(Criteria_DTO criteria);	
 		
+	//하단검색
+	List<Board_DTO> searchData(String tag, String searchData);
+	
 	
 	//글등록
 	public int b_insert(Board_DTO dto);

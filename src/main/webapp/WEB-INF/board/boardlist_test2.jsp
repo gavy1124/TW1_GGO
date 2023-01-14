@@ -194,13 +194,15 @@
 		
 		
 		
-	<form action="/springmvc/board/search.do" method="post">
+	<form action="/ggo/serarchData.do" method="post">
 		<select name="tag">
 			<option value="id">작성자</option>
 			<option value="title">제목</option>
-			<option value="content">본문</option>
+			<option value="content">내용</option>
 			<option value="write_date">작성일</option>
-		</select> <input type="text" name="search" /> <input type="submit" value="검색">
+		</select> 
+		<input type="text" name="searchData" id="searchData"/> 
+		<input type="submit" value="검색">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="" style="text-align: right;">글쓰기</a></li>
 		</ul>

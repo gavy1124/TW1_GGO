@@ -140,5 +140,42 @@
 		order by write_date desc
 	</select>
 
-
+	
+	<!-- 하단검색 --> <!-- 작성자, 제목, 내용, 작성일 -->
+	<select id="searchData" parameterType="Map" resultType="b_dto">
+		select * from b_ongo
+		<where>
+			<if test="tag == 'id' and searchData != ''">
+				id like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'title' and searchData != ''">
+				title like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'content' and searchData != ''">
+				content like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'write_date' and searchData != ''">
+				 <![CDATA[
+					write_date <= #{searchData} 
+				]]> 
+			</if>
+			<if test="tag == 'id' and searchData == ''">
+				id like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'title' and searchData == ''">
+				title like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'content' and searchData == ''">
+				content like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'write_date' and searchData == ''">
+				write_date like '%' || #{searchData} || '%'
+				<!--  <![CDATA[
+					write_date <= #{searchData} 
+				]]>  -->
+			</if>
+		</where>
+			order by write_date desc
+	</select>
+	
 </mapper> 

@@ -1,6 +1,8 @@
 package com.multi.ggo.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,15 @@ public class Board_DAOImpl implements Board_DAO {
 	@Override
 	public List<PagingVO> selectBoard(PagingVO vo) {
 		return session.selectList("com.multi.ggo.board.selectBoard", vo);
+	}
+
+	@Override
+	public List<Board_DTO> searchData(String tag, String searchData) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("tag", tag);
+		map.put("searchData", searchData);
+		System.out.println("맵체크" +map);
+		return session.selectList("com.multi.ggo.board.searchData", map);
 	}
 
 

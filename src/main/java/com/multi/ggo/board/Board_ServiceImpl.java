@@ -107,6 +107,11 @@ public class Board_ServiceImpl implements Board_Service {
 	public List<PagingVO> selectBoard(PagingVO vo) {
 		return dao.selectBoard(vo);
 	}
+
+	@Override //하단검색
+	public List<Board_DTO> searchData(String tag, String searchData) {
+		return dao.searchData(tag, searchData);
+	}
 	
 	
 	

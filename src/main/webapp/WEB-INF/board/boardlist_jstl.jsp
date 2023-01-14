@@ -140,7 +140,7 @@
 		
 		
 		
-	<form action="/springmvc/board/search.do" method="post">
+	<form action="/ggo/search.do" method="post">
 		<select name="tag">
 			<option value="id">작성자</option>
 			<option value="title">제목</option>

@@ -169,41 +169,8 @@ public class BoardController {
 //		mav.addObject("b_list", b_list);
 //		return mav;
 //	}
-	@RequestMapping("/page_test2.do")
-	public String paginglist2(PagingVO vo, Model model, String nowPage, String cntPerPage) {
-		int total = service.countBoard();
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "5";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "5";
-		}
-		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		
-		
-		
-		
-		model.addAttribute("paging", vo);
-		model.addAttribute("boardlist", service.selectBoard(vo));
-		System.out.println("공유테스트 : " + service.selectBoard(vo));
-		return "page_test2";
-	}
 	
 	
-	//카테고리 조회
-		@RequestMapping("/b_category.do")
-		public ModelAndView categorylist(String category) {
-			//System.out.println("매개변수체크 category : "+category);
-			ModelAndView mav =new ModelAndView("b_list");
-			List<Board_DTO> boardlist = service.findByCategory(category);
-			mav.addObject("category", category);
-			//System.out.println("공유체크 category : "+category);
-			mav.addObject("boardlist", boardlist);
-			//System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
-			return mav;
-		}
 	
 	
 	
@@ -278,6 +245,50 @@ public class BoardController {
 	}
 	
 	
+	//하단검색
+	@RequestMapping("serarchData.do")
+	public ModelAndView dataSearch(String tag, String searchData, Model model) {
+		ModelAndView mav = new ModelAndView("page_test2");
+		System.out.println("tag : " + tag + ",   searchData값 : " +  searchData);
+		List<Board_DTO> listall = service.searchData(tag, searchData);
+		mav.addObject("boardlist", listall);
+		return mav;
+	}
+
 	
+	//카테고리 조회
+		@RequestMapping("/b_category.do")
+		public ModelAndView categorylist(String category) {
+			//System.out.println("매개변수체크 category : "+category);
+			ModelAndView mav =new ModelAndView("b_list");
+			List<Board_DTO> boardlist = service.findByCategory(category);
+			mav.addObject("category", category);
+			//System.out.println("공유체크 category : "+category);
+			mav.addObject("boardlist", boardlist);
+			//System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
+			return mav;
+		}
+	
+	
+	
+	
+	//페이징 테스트2
+		@RequestMapping("/page_test2.do")
+		public String paginglist2(PagingVO vo, Model model, String nowPage, String cntPerPage) {
+			int total = service.countBoard();
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "5";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "5";
+			}
+			vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			model.addAttribute("paging", vo);
+			model.addAttribute("boardlist", service.selectBoard(vo));
+			System.out.println("공유테스트 : " + service.selectBoard(vo));
+			return "page_test2";
+		}
 	
 }
