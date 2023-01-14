@@ -65,10 +65,26 @@ public class Board_DAOImpl implements Board_DAO {
 		
 	}
 
-	@Override // 페이징
-	public List<Board_DTO> pagingList(Criteria_DTO criteria) {
-		System.out.println("dao임플 criteria 확인 : " + criteria);
-		return session.selectList("com.multi.ggo.board.pagingList", criteria);
+//	@Override // 페이징1
+//	public List<Board_DTO> pagingList(Criteria_DTO criteria) {
+//		System.out.println("dao임플 criteria 확인 : " + criteria);
+//		return session.selectList("com.multi.ggo.board.pagingList", criteria);
+//	}
+
+	
+	
+	
+	
+	
+	//페이징 - 테스트2
+	@Override
+	public int countBoard() {
+		return session.selectOne("com.multi.ggo.board.countBoard");
+	}
+
+	@Override
+	public List<PagingVO> selectBoard(PagingVO vo) {
+		return session.selectList("com.multi.ggo.board.selectBoard", vo);
 	}
 
 

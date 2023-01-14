@@ -3,8 +3,23 @@ package com.multi.ggo.board;
 import java.util.List;
 
 public interface Board_DAO {
-	//페이징
-	public List<Board_DTO> pagingList(Criteria_DTO criteria);	
+	
+	//페이징-테스트2
+	// 게시물 총 갯수
+	public int countBoard();
+
+	// 페이징 처리 게시글 조회
+	public List<PagingVO> selectBoard(PagingVO vo);
+	
+	
+	
+	
+	
+	
+	
+	
+	//페이징-테스트1
+//	public List<Board_DTO> pagingList(Criteria_DTO criteria);	
 		
 	
 	//글등록

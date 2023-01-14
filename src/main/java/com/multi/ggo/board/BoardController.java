@@ -169,44 +169,64 @@ public class BoardController {
 //		mav.addObject("b_list", b_list);
 //		return mav;
 //	}
-	
-	
-	
-	
-	
-	//게시글조회
-	@RequestMapping("/b_list.do")
-	public ModelAndView boardlist(Criteria_DTO criteria) {
-		ModelAndView mav =new ModelAndView("b_list");
-		List<Board_DTO> b_list = service.pagingList(criteria);
-		System.out.println("b_list 조회공유 체크 : "  + b_list);
-		
-		
-		//DB에서 데이터가져오기  - criteria 데이터만 필요
-		mav.addObject("boardlist", b_list);
+	@RequestMapping("/page_test2.do")
+	public String paginglist2(PagingVO vo, Model model, String nowPage, String cntPerPage) {
+		int total = service.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		
 		
-		//화면에 필요한 정보 가져오기 (생성자로처리됨)
-		mav.addObject("pageMaker", new Page_DTO(criteria, 500));  //500dms db에서 count(*)로가져와야한다.
 		
-		return mav;
+		model.addAttribute("paging", vo);
+		model.addAttribute("boardlist", service.selectBoard(vo));
+		System.out.println("공유테스트 : " + service.selectBoard(vo));
+		return "page_test2";
 	}
-	
 	
 	
 	//카테고리 조회
-	@RequestMapping("/b_category.do")
-	public ModelAndView categorylist(String category) {
-		System.out.println("매개변수체크 category : "+category);
-		ModelAndView mav =new ModelAndView("b_list");
-		List<Board_DTO> boardlist = service.findByCategory(category);
-		mav.addObject("category", category);
-		System.out.println("공유체크 category : "+category);
-		mav.addObject("boardlist", boardlist);
-		System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
-		return mav;
-	}
+		@RequestMapping("/b_category.do")
+		public ModelAndView categorylist(String category) {
+			//System.out.println("매개변수체크 category : "+category);
+			ModelAndView mav =new ModelAndView("b_list");
+			List<Board_DTO> boardlist = service.findByCategory(category);
+			mav.addObject("category", category);
+			//System.out.println("공유체크 category : "+category);
+			mav.addObject("boardlist", boardlist);
+			//System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
+			return mav;
+		}
+	
+	
+	
+	
+	
+	
+//	
+//	//게시글조회- 페이징 테스트1
+//	@RequestMapping("/b_list.do")
+//	public ModelAndView boardlist(Criteria_DTO criteria) {
+//		ModelAndView mav =new ModelAndView("b_list");
+//		List<Board_DTO> b_list = service.pagingList(criteria);
+//		System.out.println("b_list 조회공유 체크 : "  + b_list);
+//		//DB에서 데이터가져오기  - criteria 데이터만 필요
+//		mav.addObject("boardlist", b_list);
+//		//화면에 필요한 정보 가져오기 (생성자로처리됨)
+//		mav.addObject("pageMaker", new Page_DTO(criteria, 500));  //500dms db에서 count(*)로가져와야한다.
+//		return mav;
+//	}
+	
+	
+	
+	
 		
 	
 	

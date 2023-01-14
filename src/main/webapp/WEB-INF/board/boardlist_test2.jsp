@@ -10,18 +10,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	var category = "${category}"
+ 	var category = "${category}"
 	$(document).ready(function () {
 		//alert(category)
 		$("#category").val(category).attr("selected","selected");
 		$("#category").change(function () {
-//		alert("#category".val());////////////////////////////////////////////////////??
 			location.href="/ggo/b_category.do?category="+encodeURI($(this).val());
 		})
 		
-	})
+	}) 
 	
-
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="/ggo/page_test2.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
 	
 </script>
 </head>
@@ -41,6 +43,33 @@
 				</select>
 			</form>
 		</div>
+		</div>
+		
+		
+		<div id="outter">
+	<div style="float: right;">
+		<select id="cntPerPage" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+			<option value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+			<option value="20"
+				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+		</select>
+	</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<table class="table">
 			<thead>
 				<tr>
@@ -74,28 +103,53 @@
 	 <nav aria-label="Page navigation example center">
 		  <ul class="pagination center">
 		
+		<div style="display: block; text-align: center;">		
+			<c:if test="${paging.startPage != 1 }"> <!--startPage가 1이 아니면  시작페이지링크를 보여준다.-->
+				<a href="/ggo/page_test2.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+				<!-- startPage링크는 : 시작페이지-1    +  페이지당 글수 를 파라미터로 넘겨줌   -->
+			</c:if>
+			
+			<!-- 반복문 시작   startPage부터 ~ endPage까지  -->
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage }"> <!-- startPage부터 ~ endPage까지  == mowPage가 일치하면 페이지생성  -->
+						<b>${p }</b>
+					</c:when>
+					<c:when test="${p != paging.nowPage }"> 
+					<!-- startPage부터 ~ endPage까지  == nowPage가 일치불일치시, 링크는 nowPage에 반복숫자 + 페이지당 글수 파라미터로 보냄     -->
+						<a href="/ggo/page_test2.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			
+			
+			<c:if test="${paging.endPage != paging.lastPage}">  <!-- endPage 와 lastPage 불일치시 endPage +1 과 cntPerPage를 파라미터보냄 -->
+				<a href="/ggo/page_test2.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			</c:if>
+		</div>
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		  <%-- 
 		  <c:if test="${pageMaker.prev}"><!--시작페이지가 1이 아닌경우 보인다.  -->
 		    <li class="page-item"><a class="page-link" href="${pageMaker.startPage-1}">Previous</a></li>
 		  </c:if>
-		  
-		  
-		  
-		  
-		  
 		  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
 		    <li class="page-item ${pageMaker.criteria.pageNum == num ? 'active':''}"><a class="page-link" href="/ggo/b_list.do?pageNum=${num }">${num}</a></li>
 		  </c:forEach>
-		  
-		  
-		  
-		  
-		  
-		  
 		  <c:if test="${pageMaker.next}"> <!-- 끝 페이지가 마지막 페이지가 아닌경우보인다. -->
 		    <li class="page-item"><a class="page-link" href="${pageMaker.endPage+1}">Next</a></li>
-		   </c:if>
+		   </c:if> 
+		   --%>
 		   
 		   
 		  </ul>
@@ -106,7 +160,7 @@
 		
 		
 		
-		
+<%-- 		
 		 
 		<!-- 페이지네이션 클릭한 페이지로 이딩시키는 정보가있는 form 태그작성  -->
 		<form id="actionForm" action="/ggo/b_list.do" method="get">
@@ -130,7 +184,7 @@
 		
 		
 		</script>
-		
+		 --%>
 		
 		
 		
@@ -151,6 +205,18 @@
 			<li><a href="" style="text-align: right;">글쓰기</a></li>
 		</ul>
 	</form>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

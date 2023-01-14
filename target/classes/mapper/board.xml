@@ -6,14 +6,54 @@
 <mapper namespace="com.multi.ggo.board">
 	
 	   
+	   
+	 <!-- 페이지테스트2 *************************************************************************** --> 
+	 <!-- 총 게시글 갯수 출력 -->
+		<select id="countBoard" resultType="int">
+			SELECT COUNT(*) FROM b_ongo
+		</select>
+		
+		<!-- 페이징 처리 후 게시글 조회 --> 
+		<select id="selectBoard" resultType="b_dto">
+			SELECT * 
+				FROM (
+					SELECT ROWNUM RN, A.* 
+						FROM (
+								SELECT * 
+								FROM b_ongo 
+								ORDER BY write_date DESC 
+								) A
+						)
+			WHERE RN BETWEEN #{start} AND #{end}
+		</select> 
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
 	
-	<!-- 페이징 (DB에서 처리하는방식)
+	<!-- 페이지테스트1*************************
+	페이징 (DB에서 처리하는방식)
 	#{pageNum} * #{amount}  
 	___________________________
 	자바에서처리방식
 	${pageNum * amount} 
 	-->
-	<select id="pagingList" resultType="b_dto">
+<!-- 	<select id="pagingList" resultType="b_dto">
 		select rnum, no, title, write_date
 		<![CDATA[
 		from (
@@ -25,7 +65,7 @@
 			)where rnum > (#{pageNum}-1) * #{amount}
 		]]>
 	</select>
-	
+	 -->
 	
 	
 	

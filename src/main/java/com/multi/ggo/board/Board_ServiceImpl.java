@@ -16,11 +16,11 @@ public class Board_ServiceImpl implements Board_Service {
 		this.dao = dao;
 	}
 
-	//페이징
-		public List<Board_DTO> pagingList(Criteria_DTO critera){
-			return dao.pagingList(critera);
-			
-		}
+	//페이징1
+//		public List<Board_DTO> pagingList(Criteria_DTO critera){
+//			return dao.pagingList(critera);
+//			
+//		}
 		
 	
 	
@@ -93,6 +93,19 @@ public class Board_ServiceImpl implements Board_Service {
 	public void increaseHit(String no) {
 		dao.increaseHit(no);
 		
+	}
+
+	
+	
+	// 페이징- 테스트2
+	@Override
+	public int countBoard() {
+		return dao.countBoard();
+	}
+
+	@Override
+	public List<PagingVO> selectBoard(PagingVO vo) {
+		return dao.selectBoard(vo);
 	}
 	
 	
