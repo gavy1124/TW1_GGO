@@ -94,6 +94,7 @@
 					<li><a href="/ggo/b_category.do?category=all">게시판list</a></li>
 					<li><a href="/ggo/B_register">게시판등록하기</a></li>
 					<li><a href="/ggo/listall.do?sort=all">ex)(관리자)회원리스트</a></li>
+					<li><a href="/ggo/b_list.do">페이지테스트</a></li>
 				</ul>
 
 			</div>

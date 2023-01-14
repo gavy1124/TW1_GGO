@@ -16,6 +16,20 @@ public class Board_ServiceImpl implements Board_Service {
 		this.dao = dao;
 	}
 
+	//페이징
+		public List<Board_DTO> pagingList(Criteria_DTO critera){
+			return dao.pagingList(critera);
+			
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	@Override //글조회

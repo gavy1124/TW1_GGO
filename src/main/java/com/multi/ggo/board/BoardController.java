@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +34,14 @@ public class BoardController {
 		this.service = service;
 		this.fileuploadService = fileuploadService;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 //______________________________________________________________________________________________________________________
 
 	
@@ -151,6 +161,14 @@ public class BoardController {
 	
 	
 	
+	//게시글조회-원본
+//	@RequestMapping("/b_list.do")
+//	public ModelAndView boardlist() {
+//		ModelAndView mav =new ModelAndView("b_list");
+//		List<Board_DTO> b_list = service.b_list();
+//		mav.addObject("b_list", b_list);
+//		return mav;
+//	}
 	
 	
 	
@@ -158,12 +176,24 @@ public class BoardController {
 	
 	//게시글조회
 	@RequestMapping("/b_list.do")
-	public ModelAndView boardlist() {
+	public ModelAndView boardlist(Criteria_DTO criteria) {
 		ModelAndView mav =new ModelAndView("b_list");
-		List<Board_DTO> b_list = service.b_list();
-		mav.addObject("b_list", b_list);
+		List<Board_DTO> b_list = service.pagingList(criteria);
+		System.out.println("b_list 조회공유 체크 : "  + b_list);
+		
+		
+		//DB에서 데이터가져오기  - criteria 데이터만 필요
+		mav.addObject("boardlist", b_list);
+		
+		
+		
+		//화면에 필요한 정보 가져오기 (생성자로처리됨)
+		mav.addObject("pageMaker", new Page_DTO(criteria, 500));  //500dms db에서 count(*)로가져와야한다.
+		
 		return mav;
 	}
+	
+	
 	
 	//카테고리 조회
 	@RequestMapping("/b_category.do")

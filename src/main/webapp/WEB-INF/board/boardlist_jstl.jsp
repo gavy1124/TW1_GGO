@@ -69,15 +69,73 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<!--페이지네이션  -->
 	 <nav aria-label="Page navigation example center">
 		  <ul class="pagination center">
-		    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		    <li class="page-item"><a class="page-link" href="#">2</a></li>
-		    <li class="page-item"><a class="page-link" href="#">3</a></li>
-		    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+		
+		
+		
+		  <c:if test="${pageMaker.prev}"><!--시작페이지가 1이 아닌경우 보인다.  -->
+		    <li class="page-item"><a class="page-link" href="${pageMaker.startPage-1}">Previous</a></li>
+		  </c:if>
+		  
+		  
+		  
+		  
+		  
+		  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+		    <li class="page-item ${pageMaker.criteria.pageNum == num ? 'active':''}"><a class="page-link" href="/ggo/b_list.do?pageNum=${num }">${num}</a></li>
+		  </c:forEach>
+		  
+		  
+		  
+		  
+		  
+		  
+		  <c:if test="${pageMaker.next}"> <!-- 끝 페이지가 마지막 페이지가 아닌경우보인다. -->
+		    <li class="page-item"><a class="page-link" href="${pageMaker.endPage+1}">Next</a></li>
+		   </c:if>
+		   
+		   
 		  </ul>
 		</nav>
+		
+		
+		
+		
+		
+		
+		
+		 
+		<!-- 페이지네이션 클릭한 페이지로 이딩시키는 정보가있는 form 태그작성  -->
+		<form id="actionForm" action="/ggo/b_list.do" method="get">
+		<!-- 클릭한 href에 들어있는 이동페이지로 바꿔준다. -->
+			<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }" id="pageNum">
+			<input type="hidden" name="amount" value="${pageMaker.criteria.amount }">
+		
+		</form>
+		<script type="text/javascript">
+			$(function () {
+				//var actionForm = $("#actionForm");
+				/*  e = event*/
+				$(".page-item a").on("click", function (e) {
+					alert("페이지이동클릭");
+					e.preventDefaut();  //페이지 이동을 무시시킨다. return false와 동일 
+					//actionForm.find("input[name='pagenum]")
+					$("#pageNum").val($(this).attr("href"));
+					$("#actionForm").submit();
+				})
+			})
+		
+		
+		</script>
+		
+		
+		
+		
+		
+		
 		
 		
 		

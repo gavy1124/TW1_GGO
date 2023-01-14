@@ -4,6 +4,36 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.multi.ggo.board">
+	
+	   
+	
+	<!-- 페이징 (DB에서 처리하는방식)
+	#{pageNum} * #{amount}  
+	___________________________
+	자바에서처리방식
+	${pageNum * amount} 
+	-->
+	<select id="pagingList" resultType="b_dto">
+		select rnum, no, title, write_date
+		<![CDATA[
+		from (
+				select 
+				/* + index_desc(b_ongo)*/
+				rownum rnum, no, title, write_date
+				from b_ongo
+				where rownum <= #{pageNum} * #{amount}  
+			)where rnum > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 조회수 -->
 	<update id="hits" parameterType="String">
 	update b_ongo
@@ -53,7 +83,8 @@
 	</select>
 
 	<select id="b_list" resultType="b_dto">
-		select * from b_ongo
+		select *
+		from b_ongo
 		order by write_date desc
 	</select>
 	

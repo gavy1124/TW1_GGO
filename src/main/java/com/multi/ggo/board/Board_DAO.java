@@ -3,6 +3,10 @@ package com.multi.ggo.board;
 import java.util.List;
 
 public interface Board_DAO {
+	//페이징
+	public List<Board_DTO> pagingList(Criteria_DTO criteria);	
+		
+	
 	//글등록
 	public int b_insert(Board_DTO dto);
 		
