@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Paginatejs | Ligne</title>
+    <link rel="stylesheet" href="/ggo/common/css/paginate.css">
+    <link rel="stylesheet" href="/ggo/common/css/ligne.css">
+    <script type="text/javascript" src="/ggo/common/js/paginate.js"></script>
+
+    <style>
+        *{
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h1>Ligne Paginatejs</h1>
+    </div>
+    <div class="panel">
+        <div class="body">
+            <div class="input-group">
+                <label for="searchBox">Filtrar</label>
+                <input type="search" id="searchBox" placeholder="Filtrar...">
+            </div>
+        </div>
+    </div>
+    <table class="myTable table hover">
+        <tbody>
+        
+        <tr>
+            <td>10</td>
+            <td>200</td>
+            <td>ipsam aperiam voluptates qui</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+
+    let options = {
+        numberPerPage:5, //Cantidad de datos por pagina
+        goBar:true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
+        pageCounter:true, //Contador de paginas, en cual estas, de cuantas paginas
+    };
+
+    let filterOptions = {
+        el:'#searchBox' //Caja de texto para filtrar, puede ser una clase o un ID
+    };
+
+    paginate.init('.myTable',options,filterOptions);
+</script>
+</body>
+</html>

@@ -37,6 +37,44 @@ public class BoardController {
 	
 	
 	
+	//게시글조회- 페이징 테스트3
+//	@RequestMapping("/page_test3_2")
+//	public ModelAndView boardlist() {
+//		ModelAndView mav =new ModelAndView("page_test3-2");
+//		List<Board_DTO> b_list = service.b_list();
+//		mav.addObject("boardlist", b_list);
+//		System.out.println("체크" + b_list);
+//		return mav;
+//	}
+	
+	
+	//카테고리 조회
+	@RequestMapping("/page_test3_2")
+	public String categorylist2(String category, Model model) {
+		System.out.println("매개변수체크 category : "+category);
+		List<Board_DTO> boardlist = service.findByCategory(category);
+		
+		model.addAttribute("category", category);
+		model.addAttribute("boardlist", boardlist);
+		//mav.addObject("category", category);
+		System.out.println("공유체크 category : "+category);
+		//mav.addObject("boardlist", boardlist);
+		System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
+		return "page_test3-2";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -171,8 +209,7 @@ public class BoardController {
 //	}
 	
 	
-	
-	
+
 	
 	
 	
@@ -256,7 +293,7 @@ public class BoardController {
 	}
 
 	
-	//카테고리 조회
+	//카테고리 조회-원
 		@RequestMapping("/b_category.do")
 		public ModelAndView categorylist(String category) {
 			//System.out.println("매개변수체크 category : "+category);

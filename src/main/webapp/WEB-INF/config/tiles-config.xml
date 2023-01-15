@@ -80,6 +80,14 @@
                 <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
                 <put-attribute name="content" value="/WEB-INF/board/boardlist_test2.jsp"></put-attribute>
         </definition>
+         <definition name="page_test3" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/boardlist_test3.jsp"></put-attribute>
+        </definition>
+         <definition name="page_test3-2" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/boardlist_test3_2.jsp"></put-attribute>
+        </definition>
         	<!-- 뷰 -->
 	<definition name="index" extends="indexTemplate"></definition>
 	<!-- <definition name="login" extends="mainTemplate"></definition> -->

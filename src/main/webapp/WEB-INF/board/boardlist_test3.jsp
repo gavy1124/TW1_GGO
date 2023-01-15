@@ -43,7 +43,7 @@
 				</select>
 			</form>
 		</div>
-		</div>
+	</div>
 		
 		
 		<div id="outter">
@@ -99,7 +99,7 @@
 		</table>
 	</div>
 	
-	<!--페이지네이션  -->
+	<%-- <!--페이지네이션 테스트2  -->
 	 <nav aria-label="Page navigation example center">
 		  <ul class="pagination center">
 		
@@ -126,7 +126,23 @@
 			<c:if test="${paging.endPage != paging.lastPage}">  <!-- endPage 와 lastPage 불일치시 endPage +1 과 cntPerPage를 파라미터보냄 -->
 				<a href="/ggo/page_test2.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 			</c:if>
-		</div>
+		</div> --%>
+		
+		
+		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+		    <li class="page-item disabled">
+		      <a class="page-link">Previous</a> 
+		    </li>
+		    <li class="page-item"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item"><a class="page-link" href="#">2</a></li>
+		    <li class="page-item"><a class="page-link" href="#">3</a></li>
+		    <li class="page-item">
+		      <a class="page-link" href="#">Next</a>
+		    </li>
+		  </ul>
+		</nav>
 		
 		
 		
@@ -147,11 +163,11 @@
 		  <c:if test="${pageMaker.next}"> <!-- 끝 페이지가 마지막 페이지가 아닌경우보인다. -->
 		    <li class="page-item"><a class="page-link" href="${pageMaker.endPage+1}">Next</a></li>
 		   </c:if> 
-		   --%>
+		   
 		   
 		   
 		  </ul>
-		</nav>
+		</nav>--%>
 		
 		
 		
