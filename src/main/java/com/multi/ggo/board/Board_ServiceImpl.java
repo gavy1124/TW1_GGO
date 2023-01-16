@@ -74,8 +74,14 @@ public class Board_ServiceImpl implements Board_Service {
 	//dao클래스에 정의된 두개의 메서드를 호출
 	@Override //게시글글등록  ( + 첨부파일등록)
 	public int b_insert(Board_DTO dto, List<Board_FileDTO> boardfiledtolist) {
-		dao.b_insert(dto);
-		dao.insertFile(boardfiledtolist);
+		
+		if(boardfiledtolist.isEmpty()) {
+			dao.b_insert(dto);
+		}else{
+			System.out.println("____________________boardfiledtolist임플체크 : " + boardfiledtolist);
+			dao.b_insert(dto);
+			dao.insertFile(boardfiledtolist);
+		}
 		
 		return 0;
 	}

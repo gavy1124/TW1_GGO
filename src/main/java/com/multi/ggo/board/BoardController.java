@@ -84,7 +84,7 @@ public class BoardController {
 
 	
 	
-	// 파일업로드 (기존등록을 수정)
+	// 쓰기 + 파일업로드 (기존등록을 수정)
 	@RequestMapping(value = "/b_insert.do", method = RequestMethod.POST)
 	public String write(Board_DTO dto, HttpSession session) throws IllegalStateException, IOException {
 		
@@ -116,7 +116,7 @@ public class BoardController {
 		//4. 게시글에대한 일반적인 정보와 춤부되는 파일의 정보를 db에 저장
 		service.b_insert(dto,boardfiledtolist );
 		
-		return "redirect:/b_category.do?category=all";
+		return "redirect:/page_test3_2?category=all";
 	}
 	
 	

@@ -75,6 +75,9 @@
 				</c:forEach>
         </tbody>
     </table>
+    <ul class="nav navbar-nav navbar-right" style="float: right;">
+			<li><a href="/ggo/B_register" style="text-align: right;">글쓰기</a></li>
+	</ul>
 </div>
 <!-- 
 	<form action="/ggo/serarchData.do" method="post">
