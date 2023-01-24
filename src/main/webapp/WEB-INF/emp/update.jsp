@@ -1,4 +1,4 @@
-<%@page import="com.multi.ggo.MemberDTO"%>
+<%@page import="com.multi.ggo.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -33,7 +33,7 @@
 	//구분저장공유
 	$(document).ready(function() {
 		data = "${idRead.sort}"
-		$("#sort").val(data).attr("selected","seleted");
+		$("#sort").val(data).attr("selected","selected");
 	});
 </script>
 
@@ -65,9 +65,9 @@
 							<label class="col-sm-2 col-sm-2 control-label">구분</label>
 							<div class="col-sm-3">
 								<select class="form-control" id="sort" name="sort" >
-									<option value="중고">중고</option>
-									<option value="나눔">나눔</option>
-									<option value="업체">업체</option>
+									<option value="골드">골드</option>
+									<option value="실버">실버</option>
+									<option value="브론즈">브론즈</option>
 								</select>
 							</div>
 						</div>

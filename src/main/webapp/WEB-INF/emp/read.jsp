@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
 <html>
@@ -12,17 +11,50 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
- 
- 
- 
 	//구분저장공유
 	$(document).ready(function() {
 		data = "${idRead.sort}"
-		$("#sort").val(data).attr("selected","seleted");
+		$("#sort").val(data).attr("selected","selected");
 	});
 </script>
 
+ <style>
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
 
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal.show {
+        display: block;
+      }
+
+      .modal_body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+		text-align:left;
+        width: 200px;
+        height: auto;
+
+        padding: 5px;
+
+        text-align: center;
+
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
+      }
+    </style>
 
 <!-- 
 <script type="text/javascript">
@@ -38,20 +70,6 @@
 
 </head>
 <body>
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
 	<form class="form-horizontal" 
 		action="/ggo/idRead.do?state=UPDATE&id=${idRead.id}" 
 		method="post" >
@@ -62,9 +80,9 @@
 
 			<div class="col-sm-3">
 				<select class="form-control" id="sort" name="sort" >
-					<option value="중고">중고</option>
-					<option value="나눔">나눔</option>
-					<option value="업체">업체</option>
+					<option value="골드">골드</option>
+					<option value="실버">실버</option>
+					<option value="브론즈">브론즈</option>
 				</select>
 			</div>
 		</div>
@@ -101,8 +119,68 @@
 					<div class="col-md-2 text-right">
 						<label for="title" class="control-label">아이디</label>
 					</div>
-					<div class="col-md-8">${idRead.id}</div>
+					<div class="col-md-8" >
+					<input type="button" id="modal-open" value="${idRead.id}" style="border: 0em;">
+					</div>
+					
+					
 				</div>
+				
+				<!-- --------------------------------------------------------- -->
+				<div class="modal" id="modal">
+					<div class="modal_body">
+						<ul>
+							<li><a href="" onclick="location.href='#'">쪽지보내기</a></li>
+							<li><a href="" onclick="location.href='#'">회원정보보기</a></li>
+							<li><a href="" onclick="location.href='#'">거래내역보기</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<script type="text/javascript">
+					 const body = document.querySelector('body');
+				      const modal = document.querySelector('.modal');
+				      //const btnOpenPopup = document.querySelector('.btn-open-popup');
+				      const btnOpenPopup = document.querySelector('#modal-open');
+
+				      btnOpenPopup.addEventListener('click', () => {
+				        modal.classList.toggle('show');
+
+				        if (modal.classList.contains('show')) {
+				          body.style.overflow = 'hidden';
+				        }
+				      });
+
+				      modal.addEventListener('click', (event) => {
+				        if (event.target === modal) {
+				          modal.classList.toggle('show');
+
+				          if (!modal.classList.contains('show')) {
+				            body.style.overflow = 'auto';
+				          }
+				        }
+				      });
+				</script>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- --------------------------------------------------------- -->
 				
 				<div class="form-group">
 					<div class="col-md-2 text-right">
@@ -207,7 +285,7 @@
 				<input type="submit" class="btn btn-lg btn-primary" value="수정" >
 
 				<button type="button" class="btn btn-danger btn-lg"
-					onclick="location.href='/ggo/listall.do'">
+					onclick="location.href='/ggo/listall.do?sort=all'">
 					<i class="fa fa-fw fa-close"></i> 목록
 				</button>
 				<button type="button" class="btn btn-danger btn-lg" id="deletebtn" onclick="location.href='/ggo/idDelete.do?id=${idRead.id}'">

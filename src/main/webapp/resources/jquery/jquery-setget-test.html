@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<p>jQuery값 설정하기</p>
+	<p>양식태그에서 발생하는 값, 문서의값</p>
+	<div id="test" style="color:blue; border: solid 1px red">jQuery연습하기</div>
+	<div id="test2" style="color:blue; border: solid 1px red">jQuery연습하기</div>
+	<div id="result"></div>
+	<div id="result2"></div>
+	<form>
+		<input type="number" id="data">
+		<input type="number" id="data2">
+		<input type="button" id="btn" value="값가져오기">
+
+		<script type="text/javascript">
+		$(document).ready(function () {
+			$("#test2").css({"color":"blue", "border":"solid 1px blue"});
+			$("p").hide();
+			$("#result").text("<h1>div에 값 설정하기 - 텍스트를 자바스크립트로 추가</h1>");
+			$("#data").on("keyup", function () {
+				//id가 data인 input에 데이터가 입력될때 마다 호출
+				//myval = $("#result").text();
+				//alert(myval);
+				myval = parseInt($("#data").val())+1000;  //숫자연결을 하려면 parseInt($  내용   )
+				$("#result2").text(myval);
+			})
+			$("#btn").on("click", function () {
+				textval = $("#result2").text();
+				$("#data2").val(textval);
+			})
+		})	
+		//입력은 setter   = $("#result2").text(myval);
+		//출력은 getter   = $("#result2").text()
+		//일반텍스트는 text() 이용
+		//input 에 데이터를 넣을때는 val()
+		</script>
+	</form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>jquery</title>
+<link rel="stylesheet" href="my_style2.css">
+	
+
+</head>
+<body>
+	<div id="header">
+		<h2>아침고요수목원~</h2>
+	</div>
+	<div id="main">
+		<div class="gardenimg">
+			<img src="m_garden01.jpg" id="img1"/>
+		</div>
+		<div class="gardenimg">
+			<img src="m_garden02.jpg" />
+		</div>
+		<div class="gardenimg">
+			<img src="m_garden03.jpg" />
+		</div>
+		<div class="gardenimg">
+			<img src="m_garden04.jpg" />
+		</div>
+	</div>
+
+	<script>
+	$(document).ready(function () {
+		$(".gardenimg").on("mouseover", function () {
+			$(".gardenimg p").remove();
+			count = Math.round(Math.random()*10)+5;
+			data = $("<p>방문자수 "+ count+"</p>");
+			//alert("조회수 : " + count);
+			$(this).append(data);
+			
+		})
+	})
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

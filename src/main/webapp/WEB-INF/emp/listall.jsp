@@ -16,19 +16,23 @@
   %> --%>
   
   <script type="text/javascript">
-  //자바스크립트에서 자바가 공유해준데이터를 ${}이엘로 받아서 사용
-  var sort = "${sort}" //자바컨트롤러에서 response될때 값을 받아서 셋팅
-  //alert(sort);
-  	$(document).ready(function () {
-  		$("#sort").val(sort).attr("selected","selected");
-		$("#sort").change(function () {
-			//alert($(this).val()); //선택되는지 테스트
-			//location.href="/ggo/listall.do?sort="+$(this).val()
-			location.href="/ggo/listall.do?sort="+encodeURI($(this).val())
-					
-			//선택시 컨트롤러가 실행되며 파라미터값으로, 현재선택한속성이넘어감
+	  //자바스크립트에서 자바가 공유해준데이터를 이엘로 받아서 사용
+	  var sort = "${sort}" //자바컨트롤러에서 response될때 값을 받아서 셋팅
+	  //alert(sort);
+	  	$(document).ready(function () {
+	  		$("#sort").val(sort).attr("selected","selected");
+			$("#sort").change(function () {
+				//alert($(this).val()); //선택되는지 테스트
+				//location.href="/ggo/listall.do?sort="+$(this).val()
+				location.href="/ggo/listall.do?sort="+encodeURI($(this).val())
+						
+				//선택시 컨트롤러가 실행되며 파라미터값으로, 현재선택한속성이넘어감
+				
+				
+				
+				
+			})
 		})
-	})
   </script>
   
 </head>

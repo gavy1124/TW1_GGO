@@ -32,7 +32,7 @@
 	
 	<div style="height:90px" style="padding:10px">
 		<div id="toparea"  class="navbar navbar-inverse">
-			<a href="/ggo/listall.do" style="position:absolute;top:30px;font-size: 18pt; font-weight: bolder;text-decoration: none;padding-left: 10px">KimSaemERP</a>
+			<a href="/ggo/index.do" style="position:absolute;top:30px;font-size: 18pt; font-weight: bolder;text-decoration: none;padding-left: 10px">GGO</a>
 			<ul class="nav navbar-nav navbar-right" 
 			 style="position:relative ;top:20px" >
 			 
@@ -90,12 +90,12 @@
 					<!-- <li class="active"><a href="#">Home</a></li>
 					<li><a href="/erp/menu/insa.do">업무관리</a></li>
 					<li><a href="/erp/menu/board.do">커뮤니티</a></li> -->
-					<li><a href="#">재활용</a></li>
-					<li><a href="#">중고</a></li>
-					<li><a href="#">경매</a></li>
-					<li><a href="#">커뮤니티</a></li>
-					<li><a href="#">배달</a></li>
+					<li><a href="/ggo/page_test3_2?category=all">페이지테스트3</a></li>
 					<li><a href="/ggo/listall.do?sort=all">ex)(관리자)회원리스트</a></li>
+					<li><a href="/ggo/page_test2.do">페이지테스트2</a></li>
+					<li><a href="/ggo/b_category.do?category=all">게시판list</a></li>
+					<li><a href="/ggo/B_register">게시판등록하기</a></li>
+					<li><a href="/ggo/b_list.do">페이지테스트1</a></li>
 				</ul>
 
 			</div>

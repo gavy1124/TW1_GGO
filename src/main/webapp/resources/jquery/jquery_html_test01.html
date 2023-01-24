@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" 
+		src="../common/js/jquery-1.11.3.js"> </script> -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<div class="test1">jquery~~~</div>
+	<div class="test2">jquery~~~~</div>
+	<div id="test3">jquery~~~~</div>
+	<div id="test4">jquery~~~~</div>
+	<div id="test5">jquery~~~~</div>
+	<p>jquery연습중..</p>
+	<a id="attrtest">하이퍼링크</a>
+	<a id="attrtest2">하이퍼링크</a>
+	<div id="result"></div>
+	
+	<form action="">
+		<input type="button" id="htmlbtn" value="HTML태그 추가하기(btnhtml)/">
+		<input type="button" id="attrbtn" value="속성추가하기/">
+	</form>
+	
+	<!-- 링크속성주기 + html로 양식들어게가 넣기 -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#htmlbtn").on("click", function () {
+				$("#result").html("<h1>추가되는 문자열</h>");
+			})
+			
+			
+			$("#attrbtn").on("click", function () {
+				$("#attrtest").attr("href","https://www.naver.com");
+				$("#result").attr("id"); //id가 result인,   div태그의 id속성을 alert로 출력하기
+			//★ 속성이 여러개면 josn형식으로 준다 ★
+				$("#attrtest2").attr({
+							"href":"https://www.daum.net",
+							"target":"_blank"
+				})
+			})
+		})
+	</script>
+	
+	
+	
+	
+	
+	
+		<!-- *text()->요소의 텍스트 반환
+		  html()->선택한 요소의 html태그가 포함된 컨텐츠 반환
+		  val()->입력필드의 값을 반환
+		  attr()->요소의 속성을 반환
+		  position()-> 요소의 위치 반환
+		*/ -->
+	
+</body>
+</html>
+
+
+

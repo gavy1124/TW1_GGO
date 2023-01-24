@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans
-	xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -17,9 +20,9 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/images/**" location="/resources/images/" />
-	
-	<resources mapping="/images2/**" location="/WEB-INF/static/images/" />
+	<resources mapping="/common/**" location="/WEB-INF/static/common/" />
+	<resources mapping="/images/**" location="/WEB-INF/static/images/" />
+	<resources mapping="/upload/**" location="/WEB-INF/upload/" />
 	
 	
 	
@@ -81,11 +84,52 @@
 		<beans:constructor-arg ref="ds" />
 	</beans:bean>
 	
+	<!-- 파일업로드 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="4000000"/>
+	</beans:bean>
+	
+	
+	<!-- 인터셉터  mapping이 어떤요청에대해서 인터셉터를 적용할껀지 명시 // 제외할꺼는 exclude-mapping -->
+	<interceptors>
+		<interceptor> 
+		<!-- 전체를 등록하고, 제외할것만 작성해주는게 빠름 -->
+			<mapping path="/**"/>
+			<exclude-mapping path="/page_test3_2/**"/>
+			<exclude-mapping path="/index.do"/>
+			<exclude-mapping path="/login_Page"/>
+			<exclude-mapping path="/login.do"/>
+			<exclude-mapping path="/b_ajax.do"/>
+			
+			<beans:bean class="com.multi.ggo.intercepter.InterCepter"/>
+		</interceptor>
+	</interceptors>
+	
+	
+	
+<!-- aop작업을 수행하는 proxy가 자동으로 감지해서, aop등록된 것을 확인하고 실행될 수 있도록 처리  -->
+	<aop:aspectj-autoproxy/> 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 <!-- ______________________________________________________________________________________ -->
 
 	<context:component-scan base-package="com.multi.ggo" />
+	<context:component-scan base-package="com" />
+	<context:component-scan base-package="com.multi.ggo.board" />
+	<context:component-scan base-package="main" />
 
 
 

@@ -7,6 +7,10 @@
                 <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
                 <put-attribute name="content" value="/WEB-INF/include/mainContent.jsp"></put-attribute>
         </definition>
+        <definition name="index" template="/WEB-INF/layout/index.jsp">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/include/mainContent.jsp"></put-attribute>
+        </definition>
  
         <definition name="mainTemplate" template="/WEB-INF/layout/mainLayout.jsp">
                 <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
@@ -33,18 +37,57 @@
                 <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
                 <put-attribute name="content" value="/WEB-INF/emp/login.jsp"></put-attribute>
         </definition>
+        
+        
+        
+        <!--강의테스트  -->
+        <definition name="json_test" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/menu/it_menu.jsp"></put-attribute>
+        </definition>
+        <definition name="json_json" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/etcview/json.jsp"></put-attribute>
+        </definition>
         <!-- <definition name="logoutPage" extends="indexTemplate">
                 <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
                 <put-attribute name="content" value="/WEB-INF/emp/login.jsp"></put-attribute>
         </definition> -->
         
         
+        <!-- board관련 -->
+        <definition name="b_register" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/board_register.jsp"></put-attribute>
+        </definition>
+        
+        <definition name="b_list" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/boardlist_jstl.jsp"></put-attribute>
+        </definition>
+        <definition name="b_read_page" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/board_read.jsp"></put-attribute>
+        </definition>
+        <definition name="b_update_page" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/board_update.jsp"></put-attribute>
+        </definition>
         
         
-        
-        
-        
-        
+        <!-- 페이지관련 -->
+         <definition name="page_test2" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/boardlist_test2.jsp"></put-attribute>
+        </definition>
+         <definition name="page_test3" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/boardlist_test3.jsp"></put-attribute>
+        </definition>
+         <definition name="page_test3-2" extends="indexTemplate">
+                <put-attribute name="top" value="/WEB-INF/include/top.jsp"></put-attribute>
+                <put-attribute name="content" value="/WEB-INF/board/boardlist_test3_2.jsp"></put-attribute>
+        </definition>
         	<!-- 뷰 -->
 	<definition name="index" extends="indexTemplate"></definition>
 	<!-- <definition name="login" extends="mainTemplate"></definition> -->

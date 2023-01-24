@@ -4,10 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
         <typeAliases>
-                <typeAlias type="com.multi.ggo.MemberDTO" alias="dto"/>
+                <typeAlias type="com.multi.ggo.member.MemberDTO" alias="dto"/>
+                <typeAlias type="com.multi.ggo.board.Board_DTO" alias="b_dto"/>
+                <typeAlias type="com.multi.ggo.board.Criteria_DTO" alias="p_dto"/>
+                <typeAlias type="com.multi.ggo.board.Board_FileDTO" alias="b_filedto"/>
         </typeAliases>
         <mappers>
                 <mapper resource="mapper/member.xml"/>
+                <mapper resource="mapper/board.xml"/>
                 
         </mappers>
 </configuration>

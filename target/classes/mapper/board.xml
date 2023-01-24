@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.ggo.board">
+	
+	   
+	   
+	 <!-- 페이지테스트2 *************************************************************************** --> 
+	 <!-- 총 게시글 갯수 출력 -->
+		<select id="countBoard" resultType="int">
+			SELECT COUNT(*) FROM b_ongo
+		</select>
+		
+		<!-- 페이징 처리 후 게시글 조회 --> 
+		<select id="selectBoard" resultType="b_dto">
+			SELECT * 
+				FROM (
+					SELECT ROWNUM RN, A.* 
+						FROM (
+								SELECT * 
+								FROM b_ongo 
+								ORDER BY write_date DESC 
+								) A
+						)
+			WHERE RN BETWEEN #{start} AND #{end}
+		</select> 
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	
+	<!-- 페이지테스트1*************************
+	페이징 (DB에서 처리하는방식)
+	#{pageNum} * #{amount}  
+	___________________________
+	자바에서처리방식
+	${pageNum * amount} 
+	-->
+<!-- 	<select id="pagingList" resultType="b_dto">
+		select rnum, no, title, write_date
+		<![CDATA[
+		from (
+				select 
+				/* + index_desc(b_ongo)*/
+				rownum rnum, no, title, write_date
+				from b_ongo
+				where rownum <= #{pageNum} * #{amount}  
+			)where rnum > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 조회수 -->
+	<update id="hits" parameterType="String">
+	update b_ongo
+     	set hits = hits + 1
+     	where no = #{no}
+	</update>
+	<!-- <![CDATA[ hits+1]]> -->
+	
+	<!-- 첨부파일조회 -->
+	<select id="fileselect" parameterType="String" resultType="b_filedto">
+		select * from board_file
+		where no= #{no}
+	</select>
+	
+	
+	
+	<!--첨부파일 등록  (파라미터 넘기는게 리스트형식이기에, java.util.List식으로 넣어준다.)
+	*** 첨부파일이 몇개들어갈지 정해지지 않았다. 그래서 <foreach> 사용
+	dao에서 넘어온 parameter가 collection에서 item(이름은 임의작성) 으로 하나씩 꺼내서 넘김 ((향상된for문처럼)-->
+	<insert id="fileinsert" parameterType="java.util.List" >
+		insert all
+		<foreach collection="list" item="file" separator=" "> <!--into문 1행, 2행 구분을 separator 띄어쓰기로구분한다.  -->
+			into board_file 
+			values(b_ongo_no.currval, #{file.originalFilename}, #{file.storeFilename}, #{file.boardFileno})
+		</foreach>					
+		select * from dual
+	</insert>
+	
+	
+	
+	<!-- //다운로드 ( @PathVariable String id, @PathVariable String no, @PathVariable String boardFileno 일치하는 boardFileDTO정보가져오기) -->
+	<select id="getFile" parameterType="b_filedto" resultType="b_filedto">
+		select * from board_file
+		where no=#{no} 
+		and boardFileno=#{boardFileno}
+	</select>
+	
+	
+	
+	
+	<!-- __________________________________________________________________________ -->
+
+	
+	<select id="b_insert" parameterType="b_dto">
+		insert into b_ongo
+		values(b_ongo_no.nextval, #{id}, #{category}, #{title}, #{content}, sysdate, 0)
+	</select>
+
+	<select id="b_list" resultType="b_dto">
+		select *
+		from b_ongo
+		order by write_date desc
+	</select>
+	
+	<select id="findByCategory" resultType="b_dto" parameterType="String">
+		select * from b_ongo
+		where category = #{category}
+		order by write_date desc
+	</select>
+	
+	<select id="b_read" resultType="b_dto" parameterType="String">
+		select * from b_ongo
+		where no = #{no}
+		order by write_date desc
+	</select>
+
+	
+	<!-- 하단검색 --> <!-- 작성자, 제목, 내용, 작성일 -->
+	<select id="searchData" parameterType="Map" resultType="b_dto">
+		select * from b_ongo
+		<where>
+			<if test="tag == 'id' and searchData != ''">
+				id like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'title' and searchData != ''">
+				title like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'content' and searchData != ''">
+				content like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'write_date' and searchData != ''">
+				 <![CDATA[
+					write_date <= #{searchData} 
+				]]> 
+			</if>
+			<if test="tag == 'id' and searchData == ''">
+				id like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'title' and searchData == ''">
+				title like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'content' and searchData == ''">
+				content like '%' || #{searchData} || '%'
+			</if>
+			<if test="tag == 'write_date' and searchData == ''">
+				write_date like '%' || #{searchData} || '%'
+				<!--  <![CDATA[
+					write_date <= #{searchData} 
+				]]>  -->
+			</if>
+		</where>
+			order by write_date desc
+	</select>
+	
+</mapper> 
