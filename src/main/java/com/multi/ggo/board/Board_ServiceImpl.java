@@ -78,7 +78,7 @@ public class Board_ServiceImpl implements Board_Service {
 		if(boardfiledtolist.isEmpty()) {
 			dao.b_insert(dto);
 		}else{
-			System.out.println("____________________boardfiledtolist임플체크 : " + boardfiledtolist);
+			//System.out.println("____________________boardfiledtolist임플체크 : " + boardfiledtolist);
 			dao.b_insert(dto);
 			dao.insertFile(boardfiledtolist);
 		}

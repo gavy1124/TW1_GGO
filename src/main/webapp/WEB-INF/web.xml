@@ -40,12 +40,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	<!--한글필터 -->
 	  <filter>
         <filter-name>encodingFilter</filter-name>

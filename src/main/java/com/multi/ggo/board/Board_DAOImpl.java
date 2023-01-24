@@ -94,7 +94,7 @@ public class Board_DAOImpl implements Board_DAO {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("tag", tag);
 		map.put("searchData", searchData);
-		System.out.println("맵체크" +map);
+		//System.out.println("맵체크" +map);
 		return session.selectList("com.multi.ggo.board.searchData", map);
 	}
 

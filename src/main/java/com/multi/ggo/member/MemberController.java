@@ -149,20 +149,41 @@ public class MemberController {
 	
 	
 	
-	// 회원삭제
-	@RequestMapping("/idDelete.do")
-	public String delete(String id) {
-		int result = service.delete(id);
-		//System.out.println(result + "개 삭제완료");
-		return "redirect:listall.do?sort=all";
-	}
+	// 회원삭제 -기존
+//	@RequestMapping("/idDelete.do")
+//	public String delete(String id) {
+//		int result = service.delete(id);
+//		//System.out.println(result + "개 삭제완료");
+//		return "redirect:listall.do?sort=all";
+//	}
+	
+	// 회원삭제 -기존 ( 로그인을 하지않은 사용자가 삭제시도하면 로그인 할수있도록 로그인페이지로)
+		@RequestMapping("/idDelete.do")
+		public String delete(String id, HttpSession session, SessionStatus status) {
+			MemberDTO user = (MemberDTO) session.getAttribute("user");
+			System.out.println("user체크 : " + user);
+			String view = "";
+			
+			if(user ==null) {
+				view = "redirect:/login_Page";
+			}else {
+				int result = service.delete(id);
+				status.setComplete(); 
+				view = "redirect:listall.do?sort=all";
+			}
+			
+			//System.out.println(result + "개 삭제완료");
+			return view;
+		}
+	
+	
 	
 	// 회원수정
 	@RequestMapping("/idUpdate.do")
 	public String idUpdate(MemberDTO dto) {
-		System.out.println("업데이트 : " + dto);
+		//System.out.println("업데이트 : " + dto);
 		int memberdto = service.update(dto);
-		System.out.println(memberdto +"개 업데이트 완료");
+		//System.out.println(memberdto +"개 업데이트 완료");
 		return "redirect:listall.do?sort=all";
 	}
 	
@@ -170,7 +191,7 @@ public class MemberController {
 	// 로그인(new)
 	@RequestMapping("/login.do")
 	public String springlogin(MemberDTO loginuserInfo, Model model) {
-		System.out.println("스프링이제공하는 @SessionAttributes(\"user\")  : "  );
+		//System.out.println("스프링이제공하는 @SessionAttributes(\"user\")  : "  );
 		MemberDTO user = service.login(loginuserInfo);
 		String view="";
 		if(user != null) {
@@ -187,7 +208,7 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("/logout.do")
 	public String springlogout(SessionStatus status) {
-		System.out.println("user유저객체제거");
+		//System.out.println("user유저객체제거");
 		status.setComplete(); //세션에있는 user객체제거
 		return "index";
 	}

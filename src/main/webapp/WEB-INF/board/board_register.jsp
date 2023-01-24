@@ -102,7 +102,7 @@
 							id="title" placeholder="파일선택">
 					</div>
 				</div>
-				<div class="form-group">
+			<!-- 	<div class="form-group">
 					<div class="col-md-2 text-right">
 						<label for="files" class="control-label">파일3</label>
 					</div>
@@ -129,7 +129,7 @@
 							id="title" placeholder="파일선택">
 					</div>
 				</div>
-
+ -->
 
 
 

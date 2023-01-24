@@ -60,7 +60,7 @@ public class AjaxTestController {
 	@ResponseBody
 	public String ajaxexam(String no) {
 		String msg = "";
-		System.out.println("넘어오는파라미터 : " + no);
+		//System.out.println("넘어오는파라미터 : " + no);
 		try {
 			if (service.noSearch(no) != null) {
 				String reusltNo = service.noSearch(no).get(0).getNo();
@@ -85,8 +85,8 @@ public class AjaxTestController {
 	@RequestMapping(value = "/exam02", produces = "application/json;charset=utf-8" )
 	@ResponseBody
 	public MemberDTO ajax_json(String id) {
-		System.out.println("넘어오는파라미터 : " + id);
-		System.out.println(service.memberIdRead(id));
+		//System.out.println("넘어오는파라미터 : " + id);
+		//System.out.println(service.memberIdRead(id));
 		return service.memberIdRead(id);
 	}
 	

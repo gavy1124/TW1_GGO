@@ -87,6 +87,22 @@
 	</beans:bean>
 	
 	
+	<!-- 인터셉터  mapping이 어떤요청에대해서 인터셉터를 적용할껀지 명시 // 제외할꺼는 exclude-mapping -->
+	<interceptors>
+		<interceptor> 
+		<!-- 전체를 등록하고, 제외할것만 작성해주는게 빠름 -->
+			<mapping path="/**"/>
+			<exclude-mapping path="/page_test3_2/**"/>
+			<exclude-mapping path="/index.do"/>
+			<exclude-mapping path="/login_Page"/>
+			<beans:bean class="com.multi.ggo.ajax.TimeCheckInterCepter"/>
+			
+			
+		</interceptor>
+		
+	</interceptors>
+	
+	
 <!-- ______________________________________________________________________________________ -->
 
 	<context:component-scan base-package="com.multi.ggo" />

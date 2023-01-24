@@ -51,15 +51,15 @@ public class BoardController {
 	//카테고리 조회
 	@RequestMapping("/page_test3_2")
 	public String categorylist2(String category, Model model) {
-		System.out.println("매개변수체크 category : "+category);
+		//System.out.println("매개변수체크 category : "+category);
 		List<Board_DTO> boardlist = service.findByCategory(category);
 		
 		model.addAttribute("category", category);
 		model.addAttribute("boardlist", boardlist);
 		//mav.addObject("category", category);
-		System.out.println("공유체크 category : "+category);
+		//System.out.println("공유체크 category : "+category);
 		//mav.addObject("boardlist", boardlist);
-		System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
+		//System.out.println("탑의 리스트선택시__________listCategory공유체크" +boardlist);
 		return "page_test3-2";
 	}
 	
@@ -99,7 +99,7 @@ public class BoardController {
 		//   ㄴ servletContext 란? : 프로젝트가 서버에 배포되는 실제 경로와 context에 대한 정보를 담고 있는객체 
 		// 	getRealPath메서드가 작성자가 지정한 path와 결합해서 실제위치를 구함
 		String path = WebUtils.getRealPath(session.getServletContext(), "/WEB-INF/upload");
-		System.out.println("________업로드될서버의 경로 : "+ path);
+		//System.out.println("________업로드될서버의 경로 : "+ path);
 		
 		
 		//3.파일업로드 서비스를 호출해서 실제 서버에 업로드되도록 작업
@@ -111,7 +111,7 @@ public class BoardController {
 			boardfiledto.setBoardFileno(count + "");
 			count++;
 		}
-		System.out.println("boardfiledtolist : " +boardfiledtolist);
+		//System.out.println("boardfiledtolist : " +boardfiledtolist);
 		
 		//4. 게시글에대한 일반적인 정보와 춤부되는 파일의 정보를 db에 저장
 		service.b_insert(dto,boardfiledtolist );
@@ -132,7 +132,7 @@ public class BoardController {
 	// @PathVariable = path에서 변수로 쓸거다라는 어노테이션 
 	@RequestMapping("/download/{id}/{no}/{boardFileno}")
 	public ResponseEntity<UrlResource> downloadFile(@PathVariable String id, @PathVariable String no, @PathVariable String boardFileno, HttpSession session) throws MalformedURLException, FileNotFoundException, UnsupportedEncodingException {
-		System.out.println("@@체크: " + id+ ",  " + no + ",  "   +boardFileno);
+		//System.out.println("@@체크: " + id+ ",  " + no + ",  "   +boardFileno);
 		
 		//글번호와 파일번호를 이용해서 해당 파일을 조회
 		// ㄴ 요청한 파일에 대한 조회이므로 BoardFileDTO를 리턴하도록 처리		
@@ -140,7 +140,7 @@ public class BoardController {
 		//파일을 다운로드하기위해서 저장된 파일의 정보를 가져오기 - 다운로드를 요청한 경우 요청된 파일을 response
 		//*****dto를 넘긴다고 했을때 이렇게 생각함;;;*********************service.getFile(id, no, boardFileno);  
 		Board_FileDTO selectFileinfo = service.getFile(new Board_FileDTO(no,"","",boardFileno));  //id물려도 상관없음, 어차피 맵퍼에 물리는건 no 와 boardFileno
-		System.out.println("selectFileinfo체크 ___________: " + selectFileinfo);		
+		//System.out.println("selectFileinfo체크 ___________: " + selectFileinfo);		
 		
 		  // ㄴ 순서중요 Board_FileDTO의 멤버변수 순서로. //파일명을 이용해서 다운로드할 파일을 객체로 생성하는 작업
 		  //UrlResource resource = new UrlResource("file :" + 파일의 풀경로(RealPath )
@@ -239,22 +239,16 @@ public class BoardController {
      //게시글 읽기
 	@RequestMapping("/b_read.do")
 	public String b_read(String no, String state, Model model) {
-		System.out.println("조회수 메서드읽기전" + no);
-		
-		System.out.println("조회수 메서드읽기후" + no);
+		//System.out.println("조회수 메서드읽기전" + no);
+		//System.out.println("조회수 메서드읽기후" + no);
 		Board_DTO board = service.b_read(no);
-		
-		
-		
 		//첨부파일관련 추가
 		List<Board_FileDTO> boardfiledtolist = service.getFileList(no);
-		System.out.println("boardfiledtolist읽기 체크 _________: "+boardfiledtolist);
-		
-		
+		//System.out.println("boardfiledtolist읽기 체크 _________: "+boardfiledtolist);
 		String view="";
 		if(state.equals("READ")) {
 			service.increaseHit(no);
-			System.out.println("+++++조회수처리후 :" + board.hits);
+			//System.out.println("+++++조회수처리후 :" + board.hits);
 			view = "b_read_page";
 		}else {
 			view = "b_update_page";
@@ -275,9 +269,9 @@ public class BoardController {
 	@RequestMapping(value ="/b_ajax.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public List<Board_DTO> ajaxlist(String category) {
-		System.out.println("매개변수인입확인 : " + category);
+		//System.out.println("매개변수인입확인 : " + category);
 		List<Board_DTO> ajaxlist = service.findByCategory(category);
-		System.out.println("ajax통신확인 : " + ajaxlist);
+		//System.out.println("ajax통신확인 : " + ajaxlist);
 		return ajaxlist;
 	}
 	
@@ -286,7 +280,7 @@ public class BoardController {
 	@RequestMapping("serarchData.do")
 	public ModelAndView dataSearch(String tag, String searchData, Model model) {
 		ModelAndView mav = new ModelAndView("page_test2");
-		System.out.println("tag : " + tag + ",   searchData값 : " +  searchData);
+		//System.out.println("tag : " + tag + ",   searchData값 : " +  searchData);
 		List<Board_DTO> listall = service.searchData(tag, searchData);
 		mav.addObject("boardlist", listall);
 		return mav;
@@ -324,7 +318,7 @@ public class BoardController {
 			vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 			model.addAttribute("paging", vo);
 			model.addAttribute("boardlist", service.selectBoard(vo));
-			System.out.println("공유테스트 : " + service.selectBoard(vo));
+			//System.out.println("공유테스트 : " + service.selectBoard(vo));
 			return "page_test2";
 		}
 	

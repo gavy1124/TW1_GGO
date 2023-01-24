@@ -24,7 +24,7 @@ public class FileUploadLogic {
 				  
 				//서버에서 식별할수 있도록 파일명을 변경 ( 파일명 중복시 덮어쓰는문제 )
 				String storeFilename = createStoreFilename(originalFilename); //아래에서 uuid 만드는 메서드 (createStoreFilename)
-				System.out.println("__________orignalFilename : "+originalFilename);
+				//System.out.println("__________orignalFilename : "+originalFilename);
 				
 				// 파일객체를 실제 경로에 저장
 				// 경로 (...WEB-INF..upload) + 구분(File.separator) + 원래파일이름
