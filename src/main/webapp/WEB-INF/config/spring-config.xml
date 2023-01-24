@@ -95,9 +95,10 @@
 			<exclude-mapping path="/page_test3_2/**"/>
 			<exclude-mapping path="/index.do"/>
 			<exclude-mapping path="/login_Page"/>
-			<beans:bean class="com.multi.ggo.ajax.TimeCheckInterCepter"/>
+			<exclude-mapping path="/login.do"/>
+			<exclude-mapping path="/b_ajax.do"/>
 			
-			
+			<beans:bean class="com.multi.ggo.ajax.InterCepter"/>
 		</interceptor>
 		
 	</interceptors>
