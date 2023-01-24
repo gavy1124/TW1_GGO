@@ -1,4 +1,4 @@
-package com.multi.ggo.ajax;
+package com.multi.ggo.intercepter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
