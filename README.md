@@ -32,3 +32,4 @@ create table b_ongo(
 
 #게시판 시퀀스생성  (commons 파일업로드 이용)
 create sequence b_ongo_no;
+
